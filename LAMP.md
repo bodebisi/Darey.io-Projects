@@ -4,7 +4,8 @@
 ## LAMP is one of the webstack Technology which is a set of frameworks and tools which are very specifically chosen to work together in creating a well-functioning software.
 ## If you google LAMP stack you will find that it is a bundle of four different software technologies (which i listed above in line 3) that developers use to build websites and web applications. LAMP is an acronym for the operating system, Linux; the web server, Apache; the database server, MySQL; and the programming language, PHP.
 ### Lets get started.
-### First we we create and log into out AWS cloud server and Launch an EC2 Instance, you can click the link watch a video on how to sign up to AWS, launch an EC2 instance. https://youtu.be/xxKuB9kJoYM
+## STEP 1 — INSTALLING APACHE AND UPDATING THE FIREWALL
+### First we create and log into out AWS cloud server and Launch an EC2 Instance, you can click the link watch a video on how to sign up to AWS, launch an EC2 instance. https://youtu.be/xxKuB9kJoYM
 ### Then you connect by stating up your Virtual machine and connecting to your EC2 instaance service. click link to see how to connect https://youtu.be/TxT6PNJts-s
 ### It is important to note that you have to be in the directory you downloaded your key-pair which was created when you launched the EC2 instance.
 ### So change the directory, most times the key-pair will be in your download folder. 
@@ -27,6 +28,8 @@
 ### Another way to retrieve your Public IP address, other than to check it in AWS Web console, is to use following command curl -s http://169.254.169.254/latest/meta-data/public-ipv4
 ### The URL in browser shall also work if you do not specify port number since all web browsers use port 80 by default. If you see following page, then your web server is now correctly installed and accessible through your firewall 
 ### If you see following page, then your web server is now correctly installed and accessible through your firewall <img width="1280" alt="Screen Shot 2023-05-31 at 7 35 56 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/36154e51-e1c5-4ed6-853e-0bb8cb04ca7b">
+## STEP 2 — INSTALLING MYSQL
+    
 ### Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site in a relational database. MySQL (Which represents the M acronym in our LAMP) is a popular relational database management system used within PHP environments. so we will install it.
 ### sudo apt install mysql-server
 ### sudo mysql
@@ -42,6 +45,9 @@
 ### When you’re finished, test if you’re able to log in to the MySQL console by typing: sudo mysql -p
 ### The -p will prompt you for your password. If it works, you can exit again by typing mysql> exit
 ### Your MySQL server is now installed and secured. Next, we will install PHP, the final component in the LAMP stack
+    
+## STEP 3 — INSTALLING PHP
+    
 ### What is PHP?  PHP is the component of our setup that will process code to display dynamic content to the end user
 ### In addition to the php package, you’ll need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases. You’ll also need libapache2-mod-php to enable Apache to handle PHP files. Core PHP packages will automatically be installed as dependencies. To install these 3 packages at once, run:
 ### sudo apt install php libapache2-mod-php php-mysql
@@ -50,7 +56,10 @@
 ### You should see something like this <img width="544" alt="Screen Shot 2023-05-31 at 8 36 54 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/90d36a9d-8466-4bef-919e-4b10b4b9c4b1">
 ### At this point, your LAMP stack is completely installed and fully operational.
 ### To test your setup with a PHP script, it’s best to set up a proper Apache Virtual Host to hold your website’s files and folders. Virtual host allows you to have multiple websites located on a single machine and users of the websites will not even notice it.
-### TO do this we would start by setting up a domain called projectlamp, to create the directory for projectlamp using ‘mkdir’ command as follows:
+
+## STEP 4 — CREATING A VIRTUAL HOST FOR YOUR WEBSITE USING APACHE
+
+### To do this we would start by setting up a domain called projectlamp, to create the directory for projectlamp using ‘mkdir’ command as follows:
 ### sudo mkdir /var/www/projectlamp
 ### Next, assign ownership of the directory with your current system user:
 ### sudo chown -R $USER:$USER /var/www/projectlamp
@@ -103,6 +112,8 @@ Hit ENTER to save the file
 ### you should see this <img width="994" alt="Screen Shot 2023-05-31 at 8 54 07 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/be708e82-5aeb-4bde-900a-645162f7a091">
 
 ### You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it.
+    
+## STEP 5 — ENABLE PHP ON THE WEBSITE
 
 ### With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php.
 
