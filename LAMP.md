@@ -27,5 +27,13 @@
   Another way to retrieve your Public IP address, other than to check it in AWS Web console, is to use following command curl -s http://169.254.169.254/latest/meta-data/public-ipv4
   The URL in browser shall also work if you do not specify port number since all web browsers use port 80 by default. If you see following page, then your web server is now correctly installed and accessible through your firewall 
   If you see following page, then your web server is now correctly installed and accessible through your firewall <img width="1280" alt="Screen Shot 2023-05-31 at 7 35 56 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/36154e51-e1c5-4ed6-853e-0bb8cb04ca7b">
+ Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site in a relational database. MySQL (Which represents the M acronym in our LAMP) is a popular relational database management system used within PHP environments. so we will install it.
+  sudo apt install mysql-server
+  sudo mysql
+  You should see this <img width="520" alt="Screen Shot 2023-05-31 at 7 48 49 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e766b345-32f9-4917-ba3a-3697a782183f">
+  It’s recommended that you run a security script that comes pre-installed with MySQL. This script will remove some insecure default settings and lock down access to your database system. Before running the script you will set a password for the root user, using mysql_native_password as default authentication method.
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '*Input your password*'; 
+  then Exit the MySQL shell with: mysql> exit
+  
   
  
