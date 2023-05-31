@@ -69,40 +69,83 @@
 Hit the esc button on the keyboard
 Type wq. w for write and q for quit
 Hit ENTER to save the file
-### You can use the ls command to show the new file in the sites-available directory:
-### sudo ls /etc/apache2/sites-available
-### With this VirtualHost configuration, we’re telling Apache to serve projectlamp using /var/www/projectlampl as its web root directory. If you would like to test Apache without a domain name
-### You can now use a2ensite command to enable the new virtual host:
-### sudo a2ensite projectlamp
-### You might want to disable the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite your virtual host.
-### sudo a2dissite 000-default
-### Make sure your configuration file doesn’t contain syntax errors, run:
-### sudo apache2ctl configtest
-### Finally, reload Apache so these changes take effect:
-### sudo systemctl reload apache2
-### Your new website is now active, but the web root /var/www/projectlamp is still empty. so create an index.html file in that location so that we can test that the virtual host works as expected:
-### sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
-### Now go to your browser and try to open your website URL using IP address:
-### http://<Public-IP-Address>:80 (note that anywhere you see these anchor tags < > , going forward, it means you will need to replace the content in there with values specific to your situation)
-### you should see this <img width="994" alt="Screen Shot 2023-05-31 at 8 54 07 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/be708e82-5aeb-4bde-900a-645162f7a091">
-### You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it.
-### With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php.
-### In case you want to change this behavior, you’ll need to edit the /etc/apache2/mods-enabled/dir.conf file and change the order in which the index.php file is listed within the DirectoryIndex directive:
-### sudo vim /etc/apache2/mods-enabled/dir.conf
-### <IfModule mod_dir.c>
+
+  ### You can use the ls command to show the new file in the sites-available directory:
+
+  ### sudo ls /etc/apache2/sites-available
+
+  ### With this VirtualHost configuration, we’re telling Apache to serve projectlamp using /var/www/projectlampl as its web root directory. If you would like to test Apache without a domain name
+
+  ### You can now use a2ensite command to enable the new virtual host:
+
+  ### sudo a2ensite projectlamp
+
+  ### You might want to disable the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite your virtual host.
+
+  ### sudo a2dissite 000-default
+
+  ### Make sure your configuration file doesn’t contain syntax errors, run:
+
+  ### sudo apache2ctl configtest
+
+  ### Finally, reload Apache so these changes take effect:
+
+  ### sudo systemctl reload apache2
+
+  ### Your new website is now active, but the web root /var/www/projectlamp is still empty. so create an index.html file in that location so that we can test that the virtual host works as expected:
+
+  ### sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+
+  ### Now go to your browser and try to open your website URL using IP address:
+
+  ### http://<Public-IP-Address>:80 (note that anywhere you see these anchor tags < > , going forward, it means you will need to replace the content in there with values specific to your situation)
+
+  ### you should see this <img width="994" alt="Screen Shot 2023-05-31 at 8 54 07 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/be708e82-5aeb-4bde-900a-645162f7a091">
+
+  ### You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it.
+
+  ### With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php.
+
+  ### In case you want to change this behavior, you’ll need to edit the /etc/apache2/mods-enabled/dir.conf file and change the order in which the index.php file is listed within the DirectoryIndex directive:
+
+  ### sudo vim /etc/apache2/mods-enabled/dir.conf
+
+  ### <IfModule mod_dir.c>
         #Change this:
         #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
         #To this:
         DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
-### save and exit with esc :wqa
-### Then run: sudo systemctl reload apache2
-### Finally, we will create a PHP script to test that PHP is correctly installed and configured on your server
-### vim /var/www/projectlamp/index.php
-### This will open a blank file. Add the following text, which is valid PHP code, inside the file:
-### <?php
+
+  ### save and exit with esc :wqa
+
+  ### Then run: sudo systemctl reload apache2
+
+  ### Finally, we will create a PHP script to test that PHP is correctly installed and configured on your server
+
+  ### vim /var/www/projectlamp/index.php
+
+  ### This will open a blank file. Add the following text, which is valid PHP code, inside the file:
+
+  ### <?php
 phpinfo();
-### When you are finished, save and close the file, refresh the page and you will see a page similar to this:
+
+### When you are finished, save and close the file, refresh the page and you will see a page similar to this: <img width="991" alt="Screen Shot 2023-05-31 at 10 00 27 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f427783b-eff2-426b-809c-6fb08abb292c">
+
+### This page provides information about your server from the perspective of PHP. It is useful for debugging and to ensure that your settings are being applied correctly.
+
+### If you can see this page in your browser, then your PHP installation is working as expected.
+
+### After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment -and your Ubuntu server. You can use rm to do so:
+
+### sudo rm /var/www/projectlamp/index.php
+
+### You can always recreate this page if you need to access the information again later.
+
+### Hope you had as much fun as i did in this Project, see you in the next Project, Thank you.
+
+
+
 
   
   
