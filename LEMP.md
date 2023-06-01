@@ -97,7 +97,7 @@ server {
 #### sudo nano /var/www/projectLEMP/info.php
 ### You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php i.e
 #### http://`server_domain_or_IP`/info.php
-### You will see a web page containing detailed information about your server:
+### You will see a web page containing detailed information about your server like this <img width="971" alt="Screen Shot 2023-06-01 at 12 46 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/143fb672-7089-4265-bf2b-75d72290ca9a">
 ### it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. 
 #### sudo rm /var/www/your_domain/info.php
 ## STEP 6 – RETRIEVING DATA FROM MYSQL DATABASE WITH PHP (CONTINUED)
