@@ -152,7 +152,7 @@ try {
 ### You should see a page like this, showing the content you’ve inserted in your test table: <img width="1003" alt="Screen Shot 2023-06-01 at 2 00 35 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b382341c-9f8a-43e6-b11b-2c88ba91f101">
 ### That means your PHP environment is ready to connect and interact with your MySQL server.
 ### THE END.
-##I hope you enjoyed this Project. see you in the next.
+##I hope you enjoyed this Project, see you in the next.
 
 
 
