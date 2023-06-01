@@ -89,7 +89,7 @@ server {
 #### sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ### Now go to your browser and try to open your website URL using IP address:
 #### http://<Public-IP-Address>:80
-### Yous should see this <img width="992" alt="Screen Shot 2023-06-01 at 12 39 04 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/d7a30cee-0e50-400b-8ddc-7075e5b07b3d">
+### You should see this <img width="992" alt="Screen Shot 2023-06-01 at 12 39 04 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/d7a30cee-0e50-400b-8ddc-7075e5b07b3d">
 ### You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it.
 ### Once you do that, remember to remove or rename the index.html file from your document root, as it would take precedence over an index.php file by default.
 ## Step 5 – Testing PHP with Nginx
