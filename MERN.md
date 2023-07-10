@@ -248,6 +248,17 @@ app.listen(port, () => {
 console.log(`Server running on port ${port}`)
 });
 
+### Start your server using the command:
+#### node index.js
+### You shall see a message ‘Database connected successfully’, if so – we have our backend configured.
+#### <img width="572" alt="Screen Shot 2023-07-10 at 10 01 48 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1e299278-9fa9-4611-aeaa-eb1c9c8df0e8">
+
+#### So far we have written backend part of our To-Do application, and configured a database, but we do not have a frontend UI yet. We need ReactJS code to achieve that. But during development, we will need a way to test our code using RESTfull API. Therefore, we will need to make use of some API development client to test our code.
+
+#### In this project, we will use Postman to test our API.
+#### Click Install Postman to download and install postman on your machine.
+
+
 
 
 
