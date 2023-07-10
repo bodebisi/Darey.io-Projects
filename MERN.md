@@ -36,15 +36,15 @@
 ### You will be asked to input some details like i have done here <img width="1223" alt="Screen Shot 2023-06-01 at 8 19 49 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/6fe2309d-615e-4b6d-95f0-fd3e52c9aa85">
 ### Run the command ls to confirm that you have package.json file created.
 
-## Stage 2: INSTALL EXPRESSJS
-### Express helps to define routes of your application based on HTTP methods and URLs, To use express, install it using npm:
+### INSTALL EXPRESSJS
+#### Express helps to define routes of your application based on HTTP methods and URLs, To use express, install it using npm:
 #### npm install express
-### create a file index.js
+#### create a file index.js
 #### touch index.js
-### Install the dotenv module
+#### Install the dotenv module
 #### npm install dotenv
 #### vim index.js
-### Type the code below into it and save.
+#### Type the code below into it and save.
 ##### const express = require('express');
 require('dotenv').config();
 
@@ -66,29 +66,29 @@ app.listen(port, () => {
 console.log(`Server running on port ${port}`)
 });
 
-### Save and quit with esc :wqa
+#### Save and quit with esc :wqa
 #### cat index.js to confirm the content
 #### Notice that we have specified to use port 5000 in the code. This will be required later when we go on the browser.
-### Now it is time to start our server to see if it works.
+#### Now it is time to start our server to see if it works.
 #### node index.js
 ##### you should see this if it works <img width="497" alt="Screen Shot 2023-06-01 at 8 32 41 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1839206d-776b-4d01-bf6a-89f11f9c361b">
 ### As we can see it works, so we need to go open our port 5000 in our security group in our AWS instance. see picture below 
 #### <img width="1280" alt="Screen Shot 2023-07-10 at 7 25 10 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b5e6a4ce-b83e-4a96-8533-54214981ac43">
 ### Now we open port 5000 with our public ip on our browser
 #### <img width="1280" alt="Screen Shot 2023-07-10 at 7 20 56 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5cf290e8-69d7-49df-9158-3f71aa462202">
-### Since our <publicip:5000> is opening on our browser. We can now move to our routes.
-### There are three actions that our To-Do application needs to be able to do:
-#### Create a new task
-#### Display list of all tasks
-#### Delete a completed task
-### Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST, GET, DELETE. For each task, we need to create routes that will define various endpoints that the To-do app will depend on. We start by creating a Routes directory.
+#### Since our <publicip:5000> is opening on our browser. We can now move to our routes.
+#### There are three actions that our To-Do application needs to be able to do:
+### Create a new task
+### Display list of all tasks
+### Delete a completed task
+#### Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST, GET, DELETE. For each task, we need to create routes that will define various endpoints that the To-do app will depend on. We start by creating a Routes directory.
 #### mkdir routes
 #### Then cd routes
-### Now, create a file api.js with the command below
+#### Now, create a file api.js with the command below
 #### touch api.js
-### Open the file with the command below
+#### Open the file with the command below
 #### vim api.js
-### Copy below code in the file
+#### Copy below code in the file
 #### const express = require ('express');
 const router = express.Router();
 
@@ -105,21 +105,21 @@ router.delete('/todos/:id', (req, res, next) => {
 })
 
 module.exports = router;
-### You can confirm this with 
+#### You can confirm this with 
 #### cat api.js
 
-## Now we can move to step 3 which will involve creating models.
-### Since the app is going to make use of Mongodb which is a NoSQL database, we need to create a model. A Model is at the heart of JavaScript based applications, and it is what makes it interactive.
-### We will also use models to define the database schema . This is important so that we will be able to define the fields stored in each Mongodb document. n essence, the Schema is a blueprint of how the database will be constructed, including other data fields that may not be required to be stored in the database. To create a Schema and a model, install mongoose which is a Node.js package that makes working with mongodb easier. 
+#### Now we can move to step 3 which will involve creating models.
+#### Since the app is going to make use of Mongodb which is a NoSQL database, we need to create a model. A Model is at the heart of JavaScript based applications, and it is what makes it interactive.
+#### We will also use models to define the database schema . This is important so that we will be able to define the fields stored in each Mongodb document. n essence, the Schema is a blueprint of how the database will be constructed, including other data fields that may not be required to be stored in the database. To create a Schema and a model, install mongoose which is a Node.js package that makes working with mongodb easier. 
 #### Change directory back Todo folder with cd ..(make sure you are in the Todo folder by typing pwd and hitting enter) and install Mongoose
 #### npm install mongoose
-### After the installation, we need to create the models folder.
+#### After the installation, we need to create the models folder.
 #### mkdir models
-### Change directory into the newly created ‘models’ folder with
+#### Change directory into the newly created ‘models’ folder with
 #### cd models
-### Inside the models folder, create a file and name it todo.js
+#### Inside the models folder, create a file and name it todo.js
 #### touch todo.js
-### Open the file created with vim todo.js then paste the code below in the file:
+#### Open the file created with vim todo.js then paste the code below in the file:
 #### const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -135,9 +135,9 @@ required: [true, 'The todo text field is required']
 const Todo = mongoose.model('todo', TodoSchema);
 
 module.exports = Todo;
-### Remember i to insert the code before you paste it and :wqa to exit.
-### Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model.
-### In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit
+#### Remember to type i to insert the code before you paste it and :wqa to exit.
+#### Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model.
+#### In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit
 #### const express = require ('express');
 const router = express.Router();
 const Todo = require('../models/todo');
@@ -169,9 +169,9 @@ Todo.findOneAndDelete({"_id": req.params.id})
 })
 
 module.exports = router;
-### The next piece of our application will be the MongoDB Database
-## MONGODB DATABASE
-### We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution (DBaaS)
+#### The next piece of our application will be the MongoDB Database
+### MONGODB DATABASE
+#### We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution (DBaaS)
 ### sign up to MongoDB.com <img width="911" alt="Screen Shot 2023-07-10 at 8 22 08 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a4c7020f-af4d-40b1-86d9-5adcf507a817">
 
 ## Step 1
@@ -263,8 +263,41 @@ console.log(`Server running on port ${port}`)
 #### Create a GET request to your API on http://<PublicIP-or-PublicDNS>:5000/api/todos.repeat the process you did in the post request.  <img width="923" alt="Screen Shot 2023-07-10 at 10 34 34 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8c8a47ab-0a7a-406e-bffb-48f4c597fa3e">
 #### This request (The GET request) retrieves all existing records from out To-do application (backend requests these records from the database and sends it us back as a response to GET request). 
 
-## ## STEP 2 – FRONTEND CONFIGURATION
+## STEP 2 – FRONTEND CONFIGURATION
 
+#### Since we are done with the functionality we want from our backend and API, it is time to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, we will use the create-react-app command to scaffold our app.
+#### In the same root directory as your backend code, which is the Todo directory, run:
+####  npx create-react-app client
+### This will create a new folder in your Todo directory called client, where you will add all the react code
+### Before testing the react app, there are some dependencies that need to be installed
+
+### Install concurrently. It is used to run more than one command simultaneously from the same terminal window.
+#### npm install concurrently --save-dev
+
+### Install nodemon. It is used to run and monitor the server. If there is any change in the server code, nodemon will restart it automatically and load the new changes.
+#### npm install nodemon --save-dev
+
+### Now in Todo folder open the package.json file and replace the scripts with the code below.
+#### "scripts": {
+"start": "node index.js",
+"start-watch": "nodemon index.js",
+"dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
+},
+
+### Configure Proxy in package.json
+#### Change directory to ‘client’
+#### cd client
+#### Open the package.json file
+#### vi package.json
+#### Add the key value pair in the package.json file "proxy": "http://localhost:5000" like this <img width="571" alt="Screen Shot 2023-07-10 at 11 02 29 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b7afdb74-adcb-455a-92eb-12d8fc67c30a">
+### The whole purpose of adding the proxy configuration in number 3 above is to make it possible to access the application directly from the browser by simply calling the server url like http://localhost:5000 rather than always including the entire path like http://localhost:5000/api/todos
+
+#### Now, ensure you are inside the Todo directory, and simply do:
+#### npm run dev
+#### Your app should open and start running on localhost:3000
+#### Go to your security group in your AWS, edit inbound rules and open port 3000 see picture <img width="1233" alt="Screen Shot 2023-07-10 at 11 19 16 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/6e7e0470-7f43-4b39-97b0-571132ebd76e"> 
+
+#### Your app should open and start running on localhost:3000 <img width="1275" alt="Screen Shot 2023-07-10 at 11 08 26 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/27e8737f-4086-4ab2-bee5-60d2adee436a">
 
 
 
