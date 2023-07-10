@@ -189,7 +189,17 @@ module.exports = router;
 #### Then browse Collections <img width="893" alt="Screen Shot 2023-07-10 at 9 06 20 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/09c684d6-fe73-4bdb-9f34-e24b1136f996">
 #### Under collections, Add your data <img width="897" alt="Screen Shot 2023-07-10 at 9 10 42 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0ff1ccf0-6c6b-408d-9899-bd9e62261e06">
 #### Now create your database name and collection name <img width="887" alt="Screen Shot 2023-07-10 at 8 58 58 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e5d16b67-f4dc-4e2c-927e-af29c6e34b6d">
-####
+## since we are done creating our database, we can now go back to our Terminal to continue the project.
+### In the index.js file, we specified process.env to access environment variables, but we have not yet created this file. So we need to do that now.
+### Create a file in your Todo directory and name it .env.
+#### touch .env
+#### vi .env
+### Go to your mongoDB, connect your cluster <img width="902" alt="Screen Shot 2023-07-10 at 9 40 52 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/cb267046-5ab4-46d7-a3f4-8f2267f034b1">
+#### <img width="798" alt="Screen Shot 2023-07-10 at 9 43 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c8d1bbf2-349e-4579-ba12-dc2be35c5fe7">
+#### Add the connection string to access the database in it, just as below: <img width="800" alt="Screen Shot 2023-07-10 at 9 47 17 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4b1ccab6-5a4e-495f-b4f8-4be3558cb2a0">
+#### Ensure to update <username>, <password>, <network-address> and <database> according to your setup
+
+
 
 
 
