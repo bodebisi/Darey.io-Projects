@@ -10,8 +10,8 @@
 ### A user interacts with the ReactJS UI components at the application front-end residing in the browser. This frontend is served by the application backend residing in a server, through ExpressJS running on top of NodeJS.
 ### Any interaction that causes a data change request is sent to the NodeJS based Express server, which grabs data from the MongoDB database if required, and returns the data to the frontend of the application, which is then presented to the user.
 ## Task
-### To deploy a simple To-Do application that creates To-Do lists like this:
-### I will start by starting up an Instance on our AWS console, and connecting the instance to Virual Machince or Terminal, depening on if we are using a MacOS or Windows.
+### To deploy a simple To-Do application that creates To-Do lists.
+### First i will begin by starting up an Instance on our AWS console, then connect the instance to Virtual Machince(for those using Windows) or Terminal(For MasOS). 
 
 ## STEP 1 – BACKEND CONFIGURATION
 ### Update ubuntu
@@ -29,6 +29,7 @@
 #### npm -v
 ### Now we set up Application Code by Creating a new directory for your To-Do project.
 #### mkdir Todo
+#### ls to confirm the Todo directory
 #### cd Todo
 ### Next, you will use the command npm init to initialise your project, so that a new file named package.json will be created.
 #### npm init
