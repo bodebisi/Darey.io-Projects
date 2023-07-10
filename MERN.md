@@ -299,6 +299,75 @@ console.log(`Server running on port ${port}`)
 
 #### Your app should open and start running on localhost:3000 <img width="1275" alt="Screen Shot 2023-07-10 at 11 08 26 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/27e8737f-4086-4ab2-bee5-60d2adee436a">
 
+### Creating your React Components
+#### One of the advantages of react is that it makes use of components, which are reusable and also makes code modular. For our Todo app, there will be two stateful components and one stateless component.
+### From your Todo directory run
+#### cd client
+#### move to the src directory
+#### cd src
+### Inside your src folder create another folder called components
+#### mkdir components
+### Move into the components directory with
+#### cd components
+### Inside ‘components’ directory create three files Input.js, ListTodo.js and Todo.js.
+#### touch Input.js ListTodo.js Todo.js
+#### Open Input.js file
+#### vi Input.js
+### Copy and paste the following
+#### import React, { Component } from 'react';
+import axios from 'axios';
+
+class Input extends Component {
+
+state = {
+action: ""
+}
+
+addTodo = () => {
+const task = {action: this.state.action}
+
+    if(task.action && task.action.length > 0){
+      axios.post('/api/todos', task)
+        .then(res => {
+          if(res.data){
+            this.props.getTodos();
+            this.setState({action: ""})
+          }
+        })
+        .catch(err => console.log(err))
+    }else {
+      console.log('input field required')
+    }
+
+}
+
+handleChange = (e) => {
+this.setState({
+action: e.target.value
+})
+}
+
+render() {
+let { action } = this.state;
+return (
+<div>
+<input type="text" onChange={this.handleChange} value={action} />
+<button onClick={this.addTodo}>add todo</button>
+</div>
+)
+}
+}
+
+export default Input
+
+### To make use of Axios, which is a Promise based HTTP client for the browser and node.js, you need to cd into your client from your terminal and run yarn add axios or npm install axios.
+### Move to the src folder
+#### cd ..
+### Move to clients folder
+#### cd ..
+### Install Axios
+#### npm install axios 
+
 
 
 
