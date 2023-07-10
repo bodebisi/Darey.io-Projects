@@ -257,7 +257,13 @@ console.log(`Server running on port ${port}`)
 
 #### In this project, we will use Postman to test our API.
 #### Click Install Postman to download and install postman on your machine.
+### Now open your Postman, create a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to our To-Do list so the application could store it in the database.
+#### Note: make sure your set header key Content-Type as application/json see picture <img width="911" alt="Screen Shot 2023-07-10 at 10 26 05 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8c85eb18-15e6-4839-b054-e3f1ad1f1d9c">
+#### Then go to body and type your message and click send like this <img width="876" alt="Screen Shot 2023-07-10 at 10 25 32 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1115be87-28cb-4e67-bbba-e9af8ff53cd8">
+#### Create a GET request to your API on http://<PublicIP-or-PublicDNS>:5000/api/todos.repeat the process you did in the post request.  <img width="923" alt="Screen Shot 2023-07-10 at 10 34 34 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8c8a47ab-0a7a-406e-bffb-48f4c597fa3e">
+#### This request (The GET request) retrieves all existing records from out To-do application (backend requests these records from the database and sends it us back as a response to GET request). 
 
+## ## STEP 2 – FRONTEND CONFIGURATION
 
 
 
