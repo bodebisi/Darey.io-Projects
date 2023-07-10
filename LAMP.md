@@ -1,5 +1,6 @@
 # WEB STACK IMPLEMENTATION (LAMP STACK) IN AWS
 
+## A Webstack or Software stack refers to a combination of software technologies used to build and run web applications.
 ## LAMP stands for Linux, Apache, MySQL, PHP
 ## LAMP is one of the webstack Technology which is a set of frameworks and tools which are very specifically chosen to work together in creating a well-functioning software.
 ## If you google LAMP stack you will find that it is a bundle of four different software technologies (which i listed above in line 3) that developers use to build websites and web applications. LAMP is an acronym for the operating system, Linux; the web server, Apache; the database server, MySQL; and the programming language, PHP.
