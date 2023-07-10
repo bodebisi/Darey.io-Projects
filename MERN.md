@@ -197,7 +197,56 @@ module.exports = router;
 ### Go to your mongoDB, connect your cluster <img width="902" alt="Screen Shot 2023-07-10 at 9 40 52 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/cb267046-5ab4-46d7-a3f4-8f2267f034b1">
 #### <img width="798" alt="Screen Shot 2023-07-10 at 9 43 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c8d1bbf2-349e-4579-ba12-dc2be35c5fe7">
 #### Add the connection string to access the database in it, just as below: <img width="800" alt="Screen Shot 2023-07-10 at 9 47 17 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4b1ccab6-5a4e-495f-b4f8-4be3558cb2a0">
-#### Ensure to update <username>, <password>, <network-address> and <database> according to your setup
+#### Ensure to update,password and database according to your setup
+
+### Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.
+#### Simply delete existing content in the file, and update it with the entire code below.
+#### To do that using vim, follow below steps
+#### open the file with vim index.js
+#### Press esc
+#### Type :
+#### Type %d
+#### Hit ‘Enter’
+#### Press i to enter the insert mode in vim
+#### Now, paste the entire code below in the file.
+
+#### const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const routes = require('./routes/api');
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+
+const port = process.env.PORT || 5000;
+
+//connect to the database
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log(`Database connected successfully`))
+.catch(err => console.log(err));
+
+//since mongoose promise is depreciated, we overide it with node's promise
+mongoose.Promise = global.Promise;
+
+app.use((req, res, next) => {
+res.header("Access-Control-Allow-Origin", "\*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
+});
+
+app.use(bodyParser.json());
+
+app.use('/api', routes);
+
+app.use((err, req, res, next) => {
+console.log(err);
+next();
+});
+
+app.listen(port, () => {
+console.log(`Server running on port ${port}`)
+});
 
 
 
