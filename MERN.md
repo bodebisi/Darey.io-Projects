@@ -338,15 +338,12 @@ const task = {action: this.state.action}
     }else {
       console.log('input field required')
     }
-
 }
-
 handleChange = (e) => {
 this.setState({
 action: e.target.value
 })
 }
-
 render() {
 let { action } = this.state;
 return (
@@ -357,7 +354,6 @@ return (
 )
 }
 }
-
 export default Input
 
 ### To make use of Axios, which is a Promise based HTTP client for the browser and node.js, you need to cd into your client from your terminal and run yarn add axios or npm install axios.
