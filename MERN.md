@@ -314,7 +314,8 @@ console.log(`Server running on port ${port}`)
 #### Open Input.js file
 #### vi Input.js
 ### Copy and paste the following
-import React, { Component } from 'react';
+
+#### import React, { Component } from 'react';
 import axios from 'axios';
 
 class Input extends Component {
@@ -370,7 +371,7 @@ export default Input
 #### vi ListTodo.js
 ### in the ListTodo.js copy and paste the following code
 
-import React from 'react';
+#### import React from 'react';
 const ListTodo = ({ todos, deleteTodo }) => {
 return (
 <ul>
@@ -396,7 +397,7 @@ export default ListTodo
 
 ### Then in your Todo.js file you write the following code
 
-import React, {Component} from 'react';
+### import React, {Component} from 'react';
 import axios from 'axios';
 import Input from './Input';
 import ListTodo from './ListTodo';
@@ -449,7 +450,7 @@ export default Todo;
 #### vi App.js
 ### Copy and paste the code below into it
 
-import React from 'react';
+### import React from 'react';
 import Todo from './components/Todo';
 import './App.css';
 const App = () => {
@@ -466,7 +467,7 @@ export default App;
 #### vi App.css
 ### Then paste the following code into App.css:
 
-.App {
+### .App {
 text-align: center;
 font-size: calc(10px + 2vmin);
 width: 60%;
@@ -547,7 +548,7 @@ Exit
 #### vim index.css
 ### Copy and paste the code below:
 
-body {
+### body {
 margin: 0;
 padding: 0;
 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
