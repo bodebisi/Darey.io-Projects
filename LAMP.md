@@ -6,7 +6,7 @@
 ## If you google LAMP stack you will find that it is a bundle of four different software technologies (which i listed above in line 3) that developers use to build websites and web applications. LAMP is an acronym for the operating system, Linux; the web server, Apache; the database server, MySQL; and the programming language, PHP.
 ### Lets get started.
 ## STEP 1 — INSTALLING APACHE AND UPDATING THE FIREWALL
-### First we create and log into out AWS cloud server and Launch an EC2 Instance, you can click the link watch a video on how to sign up to AWS, launch an EC2 instance. https://youtu.be/xxKuB9kJoYM
+### First we create and log into out AWS cloud server and Launch an EC2 Instance, you can click the link watch a video on how to sign up to AWS, launch an EC2 instance. https://youtu.be/xxKuB9kJoYM 
 ### Then you connect by stating up your Virtual machine and connecting to your EC2 instaance service. click link to see how to connect https://youtu.be/TxT6PNJts-s
 ### It is important to note that you have to be in the directory you downloaded your key-pair which was created when you launched the EC2 instance.
 ### So change the directory, most times the key-pair will be in your download folder. 
