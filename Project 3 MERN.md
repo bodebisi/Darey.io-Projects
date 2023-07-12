@@ -11,7 +11,8 @@
 ### Any interaction that causes a data change request is sent to the NodeJS based Express server, which grabs data from the MongoDB database if required, and returns the data to the frontend of the application, which is then presented to the user.
 ## Task
 ### To deploy a simple To-Do application that creates To-Do lists.
-### First i will begin by starting up an Instance on our AWS console, then connect the instance to Virtual Machince(for those using Windows) or Terminal(For MasOS). See previous projects on how to launch an EC2 instance and how to connect to your Virtual Machine or Terminal.
+
+### First i will begin by starting up an Instance on our AWS console, then connect the instance to Virtual Machince(for those using Windows) or Terminal(For MasOS). See project 1 on how to launch an EC2 instance and how to connect to your Virtual Machine or Terminal.
 
 ## STEP 1 – BACKEND CONFIGURATION
 ### Update ubuntu
