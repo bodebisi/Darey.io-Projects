@@ -2,7 +2,7 @@
 
 ## LEMP is an open-source web application stack used to develop web applications. The term LEMP is an acronym that represents L for the Linux Operating system, Nginx (pronounced as engine-x, hence the E in the acronym) web server, M for MySQL database, and P for PHP scripting language. LEMP enjoys good community support and is used around the world in many highly-scaled web applications. Nginx is the second most widely used web server in the world following Apache. From our previous project, we established that web stacks consisting of a bundle of software and frameworks or libraries which are used for building full-stack web apps.
 ### Now we have a brief understanding of LEMP stack, lets start a project implementation on it.
-### First, we launch our EC2 instance and connect our Terminal (For MacOS user) or Virtual Machine.
+### ### First i will begin by starting up an Instance on our AWS console, then connect the instance to Virtual Machince(for those using Windows) or Terminal(For MasOS). See project 1 on how to launch an EC2 instance and how to connect to your Virtual Machine or Terminal.
 ## STEP 1 – INSTALLING THE NGINX WEB SERVER
 ### In order to display web pages to our site visitors, we are going to employ Nginx, a high-performance web server, we start by running: 
 #### sudo apt update
