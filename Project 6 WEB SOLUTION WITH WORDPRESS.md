@@ -157,13 +157,14 @@ setsebool -P httpd_execmem 1
 #### sudo mysql
 #### CREATE DATABASE wordpress;
 #### CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
-#### RANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+#### GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
 #### FLUSH PRIVILEGES;
 #### SHOW DATABASES;
 #### exit
 
 ## Step 4 — Configure WordPress to connect to remote database.
-## Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32 <Add pic)
+## Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32 
+<img width="1263" alt="Screen Shot 2023-07-25 at 4 19 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2a35a080-07d2-4e31-a85f-6eb6e55c0f8c">
 
 ### Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
 #### sudo yum install mysql
