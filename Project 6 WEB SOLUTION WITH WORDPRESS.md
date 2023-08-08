@@ -11,7 +11,7 @@
 
 ### Create 3 volumes in the same AZ as your Web Server EC2, each of 10 GiB. Attached is a link to help you with this step https://youtu.be/HPXnXkBzIHw 
 
-### Attach all three volumes one by one to your Web Server EC2 instance.
+### Attach all three volumes one by one to your Web Server EC2 instance <img width="1056" alt="Screen Shot 2023-08-08 at 1 00 29 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f2efb9f8-72b7-4c64-bee2-2e51c08cc397">
 
 ### Open up the Linux terminal to begin configuration
 ### Use lsblk command to inspect what block devices are attached to the server. Notice names of your newly created devices. All devices in Linux reside in /dev/ directory. Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names will likely be xvdf, xvdg, xvdh. <img width="650" alt="Screen Shot 2023-07-24 at 11 44 11 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2a253516-af9f-43a8-9dab-30a94400ef71">
@@ -110,11 +110,9 @@
 ### Install wget, Apache and it’s dependencies
 #### sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
 
-### Start Apache
-#### sudo systemctl enable httpd
-#### sudo systemctl start httpd
-
 ### Install PHP and it’s depemdencies
+#### I'd advise you google (how to install the latest version of php on red hat) to get the latest php installation as the installation below might have been updated.
+
 sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
 sudo yum module list php
@@ -123,44 +121,81 @@ sudo yum module enable php:remi-7.4
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
-setsebool -P httpd_execmem 1
 
-### Restart Apache
-#### sudo systemctl restart httpd
+### Then set this policy 
+#### setsebool -P httpd_execmem 1
+
+### Start Apache
+#### sudo systemctl enable httpd
+#### sudo systemctl start httpd
 
 ### Download wordpress and copy wordpress to var/www/html
   mkdir wordpress
   cd   wordpress
   sudo wget http://wordpress.org/latest.tar.gz
   sudo tar xzvf latest.tar.gz
+  cd wordpress
   sudo rm -rf latest.tar.gz
-  cp wordpress/wp-config-sample.php wordpress/wp-config.php
+  sudo cp -R wp-config-sample.php wp-config.php
   cp -R wordpress /var/www/html/
+  cd /var/www/html
+  ls -l
+  sudo rm -rf wordpress/
+  sudo rm -rf lost+found/
+  cd ../..
+  ls
+  cd
+  ls
+  cd wordpress
+  sudo cp -R wordpress/. /var/www/html/
+  ls -l /var/www/html
+  cd /var/www/html/
+  ls
   
-### Configure SELinux Policies
-#### sudo chown -R apache:apache /var/www/html/wordpress
-#### sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
-#### sudo setsebool -P httpd_can_network_connect=1
-
+### Install MySQL on your Web-Server
+#### sudo yum install mysql-server
+#### sudo systemctl start mysqld
+#### sudo systemctl enable mysqld
+#### sudo systemctl status mysqld
+  
 ## Step 2 — Install MySQL on your DB Server EC2
 #### sudo yum update
 #### sudo yum install mysql-server
 
 ### Verify that the service is up and running by using 
-#### sudo systemctl status mysql, 
-
+#### sudo systemctl status mysqld, 
 ### if it is not running, restart the service and enable it so it will be running even after reboot:
-#### sudo systemctl restart mysql
-#### sudo systemctl enable mysql
+#### sudo systemctl start mysqld
+#### sudo systemctl enable mysqld
+
+### set up mysql
+sudo mysql_secure_installation
+sudo mysql -u root -p
+
+### if there's an error 1045, then type 
+sudo mysql -u root -p
+input password
 
 ## Step 3 — Configure DB to work with WordPress
 #### sudo mysql
-#### CREATE DATABASE wordpress;
-#### CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
-#### GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
-#### FLUSH PRIVILEGES;
-#### SHOW DATABASES;
-#### exit
+ CREATE DATABASE wordpress;
+ CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
+ GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+ FLUSH PRIVILEGES;
+ SHOW DATABASES;
+ exit
+
+### Edit your bind-address to 0.0.0.0
+#### sudo vi /etc/my.cnf
+<img width="501" alt="Screen Shot 2023-08-08 at 3 06 07 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e31a7642-9e7d-4e51-8902-4d1bc2ed43a1">
+
+### 
+edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server private ip for your host"
+
+### Configure SELinux Policies
+#### sudo chown -R apache:apache /var/www/html/wordpress
+#### sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+#### sudo setsebool -P httpd_can_network_connect=1
 
 ## Step 4 — Configure WordPress to connect to remote database.
 ## Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32 
