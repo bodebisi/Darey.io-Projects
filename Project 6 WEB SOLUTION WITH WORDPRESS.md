@@ -189,8 +189,11 @@ input password
 #### sudo vi /etc/my.cnf
 <img width="501" alt="Screen Shot 2023-08-08 at 3 06 07 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e31a7642-9e7d-4e51-8902-4d1bc2ed43a1">
 
-### 
+### sudo vi wp-config.php
 edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server private ip for your host"
+<img width="462" alt="Screen Shot 2023-08-08 at 3 17 59 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b7b76219-b8fc-4cc9-a4b3-3365c942641b">
+
+### sudo systemctl restart httpd
 
 ### Configure SELinux Policies
 #### sudo chown -R apache:apache /var/www/html/wordpress
