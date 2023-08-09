@@ -100,6 +100,8 @@
 <img width="714" alt="Screen Shot 2023-07-25 at 2 45 56 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b9cd2449-5eff-4f87-b11a-242e80d444f2">
 <img width="716" alt="Screen Shot 2023-07-25 at 2 49 58 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f99dd704-b627-47aa-84c5-de1c5d08fc5c">
 <img width="1096" alt="Screen Shot 2023-07-25 at 2 56 29 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0d0e7691-af77-4a5f-b4f5-f071fbf227d5">
+sudo vi /etc/fstab
+<img width="781" alt="Screen Shot 2023-08-10 at 12 32 01 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c9367897-eb7d-4326-99e5-54582dfffc9b">
 <img width="698" alt="Screen Shot 2023-07-25 at 3 04 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7b0cb55e-6bbf-4ce3-b94d-54fcfccf3170">
 
 ## Install WordPress on your Web Server EC2
