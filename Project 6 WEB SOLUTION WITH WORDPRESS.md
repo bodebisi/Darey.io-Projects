@@ -1,4 +1,4 @@
-<img width="1280" alt="Screen Shot 2023-08-10 at 2 09 37 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4063ad5e-9d26-455f-a3e2-01b3fb405095">### In this project you will be tasked to prepare storage infrastructure on two Linux servers and implement a basic web solution using WordPress. WordPress is a free and open-source content management system written in PHP and paired with MySQL or MariaDB as its backend Relational Database Management System (RDBMS).
+### In this project you will be tasked to prepare storage infrastructure on two Linux servers and implement a basic web solution using WordPress. WordPress is a free and open-source content management system written in PHP and paired with MySQL or MariaDB as its backend Relational Database Management System (RDBMS).
 
 # Note that this Project will consist of two parts:
 
