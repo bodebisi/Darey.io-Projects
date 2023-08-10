@@ -1,4 +1,4 @@
-### In this project you will be tasked to prepare storage infrastructure on two Linux servers and implement a basic web solution using WordPress. WordPress is a free and open-source content management system written in PHP and paired with MySQL or MariaDB as its backend Relational Database Management System (RDBMS).
+<img width="1280" alt="Screen Shot 2023-08-10 at 2 09 37 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4063ad5e-9d26-455f-a3e2-01b3fb405095">### In this project you will be tasked to prepare storage infrastructure on two Linux servers and implement a basic web solution using WordPress. WordPress is a free and open-source content management system written in PHP and paired with MySQL or MariaDB as its backend Relational Database Management System (RDBMS).
 
 # Note that this Project will consist of two parts:
 
@@ -103,7 +103,8 @@
 sudo vi /etc/fstab
 <img width="781" alt="Screen Shot 2023-08-10 at 12 32 01 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c9367897-eb7d-4326-99e5-54582dfffc9b">
 <img width="698" alt="Screen Shot 2023-07-25 at 3 04 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7b0cb55e-6bbf-4ce3-b94d-54fcfccf3170">
-
+Verify your setup by running df -h, output must look like this:
+<img width="778" alt="Screen Shot 2023-08-10 at 12 38 35 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3c4b9d99-f1bc-4ed3-8604-90abd65a9c55">
 ## Install WordPress on your Web Server EC2
 
 ### Update the repository
@@ -123,52 +124,40 @@ sudo yum module enable php:remi-7.4
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
+setsebool -P httpd_execmem 1
 
-### Then set this policy 
-#### setsebool -P httpd_execmem 1
-
-### Start Apache
-#### sudo systemctl enable httpd
-#### sudo systemctl start httpd
+### restart Apache
+sudo systemctl restart httpd
+sudo systemctl status httpd
 
 ### Download wordpress and copy wordpress to var/www/html
   mkdir wordpress
   cd   wordpress
   sudo wget http://wordpress.org/latest.tar.gz
   sudo tar xzvf latest.tar.gz
-  cd wordpress
   sudo rm -rf latest.tar.gz
-  sudo cp -R wp-config-sample.php wp-config.php
-  cp -R wordpress /var/www/html/
-  cd /var/www/html
-  ls -l
-  sudo rm -rf wordpress/
-  sudo rm -rf lost+found/
-  cd ../..
+  sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
+  cd ..
   ls
-  cd
-  ls
-  cd wordpress
-  sudo cp -R wordpress/. /var/www/html/
-  ls -l /var/www/html
-  cd /var/www/html/
-  ls
-  
-### Install MySQL on your Web-Server
-#### sudo yum install mysql-server
-#### sudo systemctl start mysqld
-#### sudo systemctl enable mysqld
-#### sudo systemctl status mysqld
-  
+  cp -R wordpress /var/www/html/wordpress -R
+
+  ### Configure SELinux Policies
+  sudo chown -R apache:apache /var/www/html/wordpress
+  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+  sudo setsebool -P httpd_can_network_connect=1
+    
 ## Step 2 — Install MySQL on your DB Server EC2
 #### sudo yum update
 #### sudo yum install mysql-server
-
-### Verify that the service is up and running by using 
-#### sudo systemctl status mysqld, 
-### if it is not running, restart the service and enable it so it will be running even after reboot:
 #### sudo systemctl start mysqld
 #### sudo systemctl enable mysqld
+### Verify that the service is up and running by using 
+#### sudo systemctl status mysqld, 
+
+### Edit your bind-address to 0.0.0.0 on your DB-server
+sudo vi /etc/my.cnf
+now edit your bind-address like the image below.
+<img width="482" alt="Screen Shot 2023-08-10 at 1 27 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/753fbaca-ffe9-403f-aead-7d68a2b579d3">
 
 ### set up mysql
 sudo mysql_secure_installation
@@ -181,15 +170,28 @@ input password
 ## Step 3 — Configure DB to work with WordPress
 #### sudo mysql
  CREATE DATABASE wordpress;
- CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
- GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+ CREATE USER `admin`@`%` IDENTIFIED BY ‘password’;
+ GRANT ALL ON wordpress.* TO 'admin'@'%';
  FLUSH PRIVILEGES;
  SHOW DATABASES;
  exit
 
-### Edit your bind-address to 0.0.0.0
-#### sudo vi /etc/my.cnf
-<img width="501" alt="Screen Shot 2023-08-08 at 3 06 07 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e31a7642-9e7d-4e51-8902-4d1bc2ed43a1">
+### Configure WordPress to connect to remote database.
+Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
+<img width="1277" alt="Screen Shot 2023-08-10 at 1 51 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/75a8f0ee-3923-42a7-b0a0-bde5e75f707b">
+
+### Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
+sudo yum install mysql
+sudo mysql -u admin -ppassword -h 172.31.94.74
+show databases;
+<img width="1280" alt="Screen Shot 2023-08-10 at 2 09 37 AM 1" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0c296a00-45e0-47f0-a2a6-d0818a0cf17c">
+
+#### cd /var/www/html/
+ls
+cd wordpress/
+ls
+cd wordpress/
+ls
 
 ### sudo vi wp-config.php
 edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server private ip for your host"
@@ -197,14 +199,7 @@ edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server pr
 
 ### sudo systemctl restart httpd
 
-### Configure SELinux Policies
-#### sudo chown -R apache:apache /var/www/html/wordpress
-#### sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
-#### sudo setsebool -P httpd_can_network_connect=1
 
-## Step 4 — Configure WordPress to connect to remote database.
-## Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32 
-<img width="1263" alt="Screen Shot 2023-07-25 at 4 19 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2a35a080-07d2-4e31-a85f-6eb6e55c0f8c">
 
 ### Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
 #### sudo yum install mysql
