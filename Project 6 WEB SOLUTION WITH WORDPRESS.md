@@ -178,38 +178,38 @@ Start Apache
 <img width="535" alt="Screen Shot 2023-08-11 at 2 32 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/113b04b1-3d2f-4a9b-aa58-9ffcce7362ae">
 
 Download wordpress and copy wordpress to var/www/html
-sudo ls -l /var/www/html
-mkdir wordpress
-cd wordpress/
-sudo wget http://wordpress.org/latest.tar.gz
-ls -l
-sudo tar xzvf latest.tar.gz
-ls -l
-cd wordpress/
-ls -l
-sudo cp -R wp-config-sample.php wp-config.php 
-ls -l
-cat wp-config.php
-pwd
-cd ..
-ls
-sudo cp -R wordpress/ /var/www/html
-cd /var/www/html
-ls -l
-sudo rm -rf wordpress/
-sudo rm -rf lost+found/
-ls
-ls -l
-cd ../..
-cd
-ls
-cd wordpress/
-ls
-ls -l wordpress
-sudo cp -R wordpress/. /var/www/html/
-sudo ls -l /var/www/html
-cd /var/www/html
-ls
+#### sudo ls -l /var/www/html
+#### mkdir wordpress
+#### cd wordpress/
+#### sudo wget http://wordpress.org/latest.tar.gz
+#### ls -l
+#### sudo tar xzvf latest.tar.gz
+#### ls -l
+#### cd wordpress/
+#### ls -l
+#### sudo cp -R wp-config-sample.php wp-config.php 
+#### ls -l
+#### cat wp-config.php
+#### pwd
+#### cd ..
+#### ls
+#### sudo cp -R wordpress/ /var/www/html
+#### cd /var/www/html
+#### ls -l
+#### sudo rm -rf wordpress/
+#### sudo rm -rf lost+found/
+#### ls
+#### ls -l
+#### cd ../..
+#### cd
+#### ls
+#### cd wordpress/
+#### ls
+#### ls -l wordpress
+#### sudo cp -R wordpress/. /var/www/html/
+#### sudo ls -l /var/www/html
+#### cd /var/www/html
+#### ls
 
 
 Step 2 — Install MySQL on your DB Server EC2
