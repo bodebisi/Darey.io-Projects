@@ -107,7 +107,8 @@ Test the configuration and reload the daemon
 Verify your setup by running 
 ### df -h
 
-Output should look like this:
+Your Output should look like this
+
 <img width="721" alt="Screen Shot 2023-07-25 at 2 18 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5e34fe66-5795-445a-8095-14f9ed828adf">
 
 # Step 2 — Prepare the Database Server
@@ -247,55 +248,46 @@ Configure DB to work with WordPress
 Set your bind-address to 0.0.0.0 on your DB-server
 ### sudo vi /etc/my.cnf
 
-Do the following edits In your Web-server
+Do the following edits In your Web-server. Edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server private ip for your host)
 ### sudo vi wp-config.php
 
 <img width="623" alt="Screen Shot 2023-08-11 at 3 42 21 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/297c8304-b97e-4e69-babd-f8c0571b3198">
 
-Now disable the default page of apache to enable wordpress to run
+Change permissions and configuration so default Apache is disabled to use WordPress
 ### sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
-<img width="482" alt="Screen Shot 2023-08-10 at 1 27 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/753fbaca-ffe9-403f-aead-7d68a2b579d3">
-
-Configure WordPress to connect to remote database.
-Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
+Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
 
 <img width="1277" alt="Screen Shot 2023-08-10 at 1 51 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/75a8f0ee-3923-42a7-b0a0-bde5e75f707b">
 
 Test that you can connect from your Web Server to your DB server by using mysql-client
 ### sudo mysql - h 172.31.91.121-u admin-p
-show databases;
-<img width="1280" alt="Screen Shot 2023-08-10 at 2 09 37 AM 1" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0c296a00-45e0-47f0-a2a6-d0818a0cf17c">
 
-#### cd /var/www/html/
-ls
-cd wordpress/
-ls
-cd wordpress/
-ls
+Verify if you can successfully execute SHOW DATABASES; command and see a list of existing databases.
 
-### sudo vi wp-config.php
-edit DB Name, DB User, DB Password and DB Host. (remeber to use the DB server private ip for your host"
-<img width="462" alt="Screen Shot 2023-08-08 at 3 17 59 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b7b76219-b8fc-4cc9-a4b3-3365c942641b">
+<img width="623" alt="Screen Shot 2023-08-11 at 4 03 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/df2aae98-4b4f-4ba9-8154-cb9c6c96edec">
 
-### sudo systemctl restart httpd
+Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
+<img width="1020" alt="Screen Shot 2023-08-11 at 4 06 44 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f5059bc6-7e75-4791-b984-fbbb8e38fdeb">
 
+Configure SELinux Policies
+### sudo chown -R apache:apache /var/www/html/
+### sudo chcon -t httpd_sys_rw_content_t /var/www/html/ -R
+### sudo setsebool -P httpd_can_network_connect=1
+### sudo setsebool -P httpd_can_network_connect_db 1
 
-### Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
-#### sudo yum install mysql
-#### sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
+Try to access from your browser the link to your WordPress http://Web-Server-Public-IP-Address
 
-### Verify if you can successfully execute SHOW DATABASES; command and see a list of existing databases.
-### Change permissions and configuration so Apache could use WordPress:
-#### Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
-#### Try to access from your browser the link to your WordPress http://<Web-Server-Public-IP-Address>/wordpress/ <Add pic>
+Fill out your DB credentials:
 
-### Fill out your DB credentials: <Add pic>
+<img width="1276" alt="Screen Shot 2023-08-11 at 4 20 44 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f50b76e2-3047-4106-80a8-3138ea537daf">
 
-### If you see this message – it means your WordPress has successfully connected to your remote MySQL database <Add Pic>
+### If you see this message – it means your WordPress has successfully connected to your remote MySQL database and you are signed in:
+
+<img width="1280" alt="Screen Shot 2023-08-11 at 4 23 16 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f58a1df6-34f8-4c53-aacf-8bf7eefe2bd5">
 
 ## Important: Do not forget to STOP your EC2 instances after completion of the project to avoid extra costs.
 
 # CONGRATULATIONS!
-### You have learned how to configure Linux storage subsystem and have also deployed a full-scale Web Solution using WordPress CMS and MySQL RDBMS!
+You have learned how to configure Linux storage subsystem and have also deployed a full-scale Web Solution using WordPress CMS and MySQL RDBMS!
