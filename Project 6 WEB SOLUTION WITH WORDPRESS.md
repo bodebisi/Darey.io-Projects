@@ -148,7 +148,7 @@ Repeat the same steps as for the Web Server, but instead of apps-lv create db-lv
 ## Install WordPress on your Web Server EC2
 
 Update the repository
-#### sudo yum -y update
+### sudo yum -y update
 
 Install wget, Apache and it’s dependencies
 ### sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
@@ -211,45 +211,59 @@ Download wordpress and copy wordpress to var/www/html
 #### cd /var/www/html
 #### ls
 
+<img width="778" alt="Screen Shot 2023-08-11 at 3 04 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/59dc77e0-df6e-45c7-8f05-2d258e2062bb">
 
-Step 2 — Install MySQL on your DB Server EC2
-### sudo yum update
+Then Install mysql in the web-server
 ### sudo yum install mysql-server
 ### sudo systemctl start mysqld
 ### sudo systemctl enable mysqld
+### sudo systemctl status mysqld
 
-Verify that the service is up and running by using 
-### sudo systemctl status mysqld, 
+Step 2 — Install MySQL on your DB Server EC2
+### sudo yum update
+### sudo yum install mysql-server -y
+### sudo systemctl start mysqld
+### sudo systemctl enable mysqld
+### sudo systemctl status mysqld
 
-Edit your bind-address to 0.0.0.0 on your DB-server
-### sudo vi /etc/my.cnf
-
-<img width="482" alt="Screen Shot 2023-08-10 at 1 27 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/753fbaca-ffe9-403f-aead-7d68a2b579d3">
-
-Set up mysql
-sudo mysql_secure_installation
-sudo mysql -u root -p
-
-### if there's an error 1045, then type 
-sudo mysql -u root -p
+Configure DB to work with WordPress
+### sudo mysql_secure_installation
+### sudo mysql
+if there's an error 1045, then type 
+### sudo mysql -u root -p
 input password
 
-## Step 3 — Configure DB to work with WordPress
+
+Configure DB to work with WordPress
 #### sudo mysql
  CREATE DATABASE wordpress;
+ SHOW DATABASES;
  CREATE USER `admin`@`%` IDENTIFIED BY ‘password’;
  GRANT ALL ON wordpress.* TO 'admin'@'%';
  FLUSH PRIVILEGES;
- SHOW DATABASES;
+ select user, host from mysql.user; (To check if the user is created)
  exit
 
-### Configure WordPress to connect to remote database.
+Set your bind-address to 0.0.0.0 on your DB-server
+### sudo vi /etc/my.cnf
+
+Do the following edits In your Web-server
+### sudo vi wp-config.php
+
+<img width="623" alt="Screen Shot 2023-08-11 at 3 42 21 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/297c8304-b97e-4e69-babd-f8c0571b3198">
+
+Now disable the default page of apache to enable wordpress to run
+### sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
+
+<img width="482" alt="Screen Shot 2023-08-10 at 1 27 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/753fbaca-ffe9-403f-aead-7d68a2b579d3">
+
+Configure WordPress to connect to remote database.
 Hint: Do not forget to open MySQL port 3306 on DB Server EC2. For extra security, you shall allow access to the DB server ONLY from your Web Server’s IP address, so in the Inbound Rule configuration specify source as /32
+
 <img width="1277" alt="Screen Shot 2023-08-10 at 1 51 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/75a8f0ee-3923-42a7-b0a0-bde5e75f707b">
 
-### Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
-sudo yum install mysql
-sudo mysql -u admin -ppassword -h 172.31.94.74
+Test that you can connect from your Web Server to your DB server by using mysql-client
+### sudo mysql - h 172.31.91.121-u admin-p
 show databases;
 <img width="1280" alt="Screen Shot 2023-08-10 at 2 09 37 AM 1" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0c296a00-45e0-47f0-a2a6-d0818a0cf17c">
 
