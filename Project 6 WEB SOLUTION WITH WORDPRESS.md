@@ -150,56 +150,83 @@ Repeat the same steps as for the Web Server, but instead of apps-lv create db-lv
 Update the repository
 #### sudo yum -y update
 
-### Install wget, Apache and it’s dependencies
-#### sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
+Install wget, Apache and it’s dependencies
+### sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
 
-### Install PHP and it’s depemdencies
-#### I'd advise you google (how to install the latest version of php on red hat) to get the latest php installation as the installation below might have been updated.
+Install PHP and it’s dependencies
+## Note: It is always advisable to google (how to install the latest version of php on red hat) so as to get the latest php installation as the installation below might have been updated.
 
-sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-sudo yum module list php
-sudo yum module reset php
-sudo yum module enable php:remi-7.4
-sudo yum install php php-opcache php-gd php-curl php-mysqlnd
-sudo systemctl start php-fpm
-sudo systemctl enable php-fpm
-setsebool -P httpd_execmem 1
+### sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+### sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+### sudo dnf module list php
+### sudo dnf module enable php:remi-8.2
+### sudo dnf install php php-cli php-common 
+### sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+### php -v 
+### sudo systemctl start php-fpm
+### sudo systemctl enable php-fpm
+### sudo setsebool -P httpd_execmem 1
+### sudo systemctl status php-fpm
 
-### restart Apache
-sudo systemctl restart httpd
-sudo systemctl status httpd
+<img width="525" alt="Screen Shot 2023-08-11 at 2 26 14 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1ed7bf60-7eb3-4325-a655-1f8bd5a40dd3">
 
-### Download wordpress and copy wordpress to var/www/html
-  mkdir wordpress
-  cd   wordpress
-  sudo wget http://wordpress.org/latest.tar.gz
-  sudo tar xzvf latest.tar.gz
-  sudo rm -rf latest.tar.gz
-  sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
-  cd ..
-  ls
-  cp -R wordpress /var/www/html/wordpress -R
+Start Apache
+### sudo systemctl start httpd
+### sudo systemctl enable httpd
+### sudo systemctl status httpd
 
-  ### Configure SELinux Policies
-  sudo chown -R apache:apache /var/www/html/wordpress
-  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
-  sudo setsebool -P httpd_can_network_connect=1
-    
-## Step 2 — Install MySQL on your DB Server EC2
-#### sudo yum update
-#### sudo yum install mysql-server
-#### sudo systemctl start mysqld
-#### sudo systemctl enable mysqld
-### Verify that the service is up and running by using 
-#### sudo systemctl status mysqld, 
+<img width="535" alt="Screen Shot 2023-08-11 at 2 32 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/113b04b1-3d2f-4a9b-aa58-9ffcce7362ae">
 
-### Edit your bind-address to 0.0.0.0 on your DB-server
-sudo vi /etc/my.cnf
-now edit your bind-address like the image below.
+Download wordpress and copy wordpress to var/www/html
+sudo ls -l /var/www/html
+mkdir wordpress
+cd wordpress/
+sudo wget http://wordpress.org/latest.tar.gz
+ls -l
+sudo tar xzvf latest.tar.gz
+ls -l
+cd wordpress/
+ls -l
+sudo cp -R wp-config-sample.php wp-config.php 
+ls -l
+cat wp-config.php
+pwd
+cd ..
+ls
+sudo cp -R wordpress/ /var/www/html
+cd /var/www/html
+ls -l
+sudo rm -rf wordpress/
+sudo rm -rf lost+found/
+ls
+ls -l
+cd ../..
+cd
+ls
+cd wordpress/
+ls
+ls -l wordpress
+sudo cp -R wordpress/. /var/www/html/
+sudo ls -l /var/www/html
+cd /var/www/html
+ls
+
+
+Step 2 — Install MySQL on your DB Server EC2
+### sudo yum update
+### sudo yum install mysql-server
+### sudo systemctl start mysqld
+### sudo systemctl enable mysqld
+
+Verify that the service is up and running by using 
+### sudo systemctl status mysqld, 
+
+Edit your bind-address to 0.0.0.0 on your DB-server
+### sudo vi /etc/my.cnf
+
 <img width="482" alt="Screen Shot 2023-08-10 at 1 27 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/753fbaca-ffe9-403f-aead-7d68a2b579d3">
 
-### set up mysql
+Set up mysql
 sudo mysql_secure_installation
 sudo mysql -u root -p
 
