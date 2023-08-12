@@ -24,7 +24,11 @@ Programming Language: PHP
 Code Repository: GitHub
 
 ## Step 1 – Prepare NFS Server
-Spin up a new EC2 instance with RHEL Linux 8 Operating System.
+Spin up 4 new EC2 instance with RHEL Linux 8 Operating System. (one instance for your NFS server and the remaining 3 for webservers 1,2 & 3)
+Also spin up an additional instance with Ubuntu operating system to serve as the database server) 
+Create abd attach 3 volumes to the NFS server. 
+### use lsblk 
+To confirm the attched volumes when you connect the instance to your terminal
 
 Based on your LVM experience from Project 6, Configure LVM on the Server.
 Instead of formating the disks as ext4 you will have to format them as xfs
