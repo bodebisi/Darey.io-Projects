@@ -175,42 +175,89 @@ NFS-Server-Private-IP-Address:/mnt/apps /var/www nfs defaults 0 0
 
 Install Remi’s repository, Apache and PHP
 ### sudo yum install httpd -y
+### sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+### sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+### sudo dnf module reset php
+### sudo dnf module enable php:remi-7.4
+### sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
+### sudo systemctl start php-fpm
+### sudo systemctl enable php-fpm
+### setsebool -P httpd_execmem 1
 
-sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-
-sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-
-sudo dnf module reset php
-
-sudo dnf module enable php:remi-7.4
-
-sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
-
-sudo systemctl start php-fpm
-
-sudo systemctl enable php-fpm
-
-setsebool -P httpd_execmem 1
 Repeat steps 1-5 for another 2 Web Servers.
 
 Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files – it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other Web Servers.
+### sudo mount -t nfs -o rw,nosuid 172.31.87.96:/mnt/logs /var/log/httpd
+
 Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
-Fork the tooling source code from Darey.io Github Account to your Github account. (Learn how to fork a repo here)
+### sudo vi /etc/fstab
+#### 172.31.87.96:/mnt/logs /var/log/httpd nfs defaults 0 0
+#### esc + wqa!
+
+Fork the tooling source code from Darey.io Github Account to your Github account.
+
+![Screen Shot 2023-08-13 at 2 46 06 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e85955d8-8aa0-4ab7-8df1-bf26078bcfda)
+
+### sudo yum install git -y
+### git init 
+### git clone https://github.com/darey-io/tooling.git
+### ls
+### cd tooling
+
 Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
-Note 1: Do not forget to open TCP port 80 on the Web Server.
+### sudo cp -R html/. /var/www/html
 
-Note 2: If you encounter 403 Error – check permissions to your /var/www/html folder and also disable SELinux sudo setenforce 0
-To make this change permanent – open following config file sudo vi /etc/sysconfig/selinux and set SELINUX=disabledthen restrt httpd.
+## Note 1: Do not forget to open TCP port 80 on the Web Server.
 
+## Note 2: If you encounter 403 Error – check permissions to your /var/www/html folder and also disable SELinux 
+### sudo setenforce 0
+
+To make this change permanent – open following config file 
+### sudo vi /etc/sysconfig/selinux 
+and set SELINUX=disabled then restrt httpd.
+
+<img width="640" alt="Screen Shot 2023-08-13 at 3 15 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/6b631267-ce72-4a3d-a8f9-18ef88d51d32">
+
+### sudo systemctl start httpd
+### sudo systemctl status httpd
+![Screen Shot 2023-08-13 at 3 13 27 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4da76f14-9d81-4e9c-a090-5d4ab1c67a29)
         
+Update the website’s configuration to connect to the database (in /var/www/html/functions.php file).
+### sudo vi /var/www/html/functions.php 
+![Screen Shot 2023-08-13 at 3 21 16 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ccfd57b1-c4d4-4916-b65a-a4b8b32be718)
 
-Update the website’s configuration to connect to the database (in /var/www/html/functions.php file). Apply tooling-db.sql script to your database using this command mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
+Apply tooling-db.sql script to your database using this command 
+### cd tooling
+### sudo yum install mysql -y
+### mysql -h <databse-private-ip> -u <db-username> -p <db-password> tooling < tooling-db.sql
+
+If you encounter any error:
+Make sure mysql security group is opened in your DB server.
+then go to your DB server and edit the bind address 
+### sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+
+![Screen Shot 2023-08-13 at 3 41 31 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8366fd7d-aee6-4b8c-83c8-e8e67b84fcae)
+
+### sudo systemctl restart mysql
+### sudo systemctl status mysql
+
 Create in MySQL a new admin user with username: myuser and password: password:
 INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
--> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+-> (1, ‘admin’, ‘21232f297a57a5a743894a0e4a801fc3’, ‘dare@dare.com’, ‘admin’, ‘1’);
 
-Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with myuser user.
-        
+### sudo mysql
+#### show databases;
+#### use tooling;
+#### show tables;
+#### select * from users;
 
-Congratulations!
+![Screen Shot 2023-08-13 at 3 50 16 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9f2a522d-8b79-48db-8280-ece691c1c733)
+
+<img width="910" alt="Screen Shot 2023-08-13 at 4 17 36 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/697b85bc-9f9c-42ac-845c-0c187b6508c7">
+
+#### Open the website in your browser http://Web-Server-Public-IP-Address-or-Public-DNS-Name/index.php and make sure you can login into the website with myuser user.
+
+![Screen Shot 2023-08-13 at 3 57 00 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3c21bd79-2ad5-46dc-bc4c-df1faa41655e)
+
+# Congratulations!
 You have just implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers.
