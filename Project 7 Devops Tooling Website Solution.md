@@ -224,7 +224,7 @@ and set SELINUX=disabled then restrt httpd.
         
 Update the website’s configuration to connect to the database (in /var/www/html/functions.php file).
 ### sudo vi /var/www/html/functions.php 
-![Screen Shot 2023-08-13 at 3 21 16 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ccfd57b1-c4d4-4916-b65a-a4b8b32be718)
+<img width="576" alt="Screen Shot 2023-08-13 at 4 41 00 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/79a70364-3a86-4af0-9797-8974c190128e">
 
 Apply tooling-db.sql script to your database using this command 
 ### cd tooling
