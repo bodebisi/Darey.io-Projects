@@ -89,6 +89,8 @@ Install NFS server, configure it to start on reboot and make sure it is u and ru
 Export the mounts for webservers’ subnet cidr to connect as clients. For simplicity, you will install your all three Web Servers inside the same subnet, but in production set up you would probably want to separate each tier inside its own subnet for higher level of security.
 
 To check your subnet cidr – open your EC2 details in AWS web console and locate ‘Networking’ tab and open a Subnet link:
+![Screen Shot 2023-08-13 at 12 34 57 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3d5a96ce-0bb6-4a18-a064-c4e7d781e8dc)
+![Screen Shot 2023-08-13 at 12 35 53 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1208564f-dde4-48e6-a142-1627c2c04192)
         
 Make sure we set up permission that will allow our Web servers to read, write and execute files on NFS:
 ### sudo chown -R nobody: /mnt/apps
@@ -104,21 +106,21 @@ Make sure we set up permission that will allow our Web servers to read, write an
 Configure access to NFS for clients within the same subnet (example of Subnet CIDR – 172.31.32.0/20 ):
 
 ### sudo vi /etc/exports
-
-### /mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
-### /mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
-### /mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
-
+#### /mnt/apps Subnet-CIDR(rw,sync,no_all_squash,no_root_squash)
+#### /mnt/logs Subnet-CIDR(rw,sync,no_all_squash,no_root_squash)
+#### /mnt/opt Subnet-CIDR(rw,sync,no_all_squash,no_root_squash)
 Esc + :wq!
+<img width="840" alt="Screen Shot 2023-08-13 at 1 24 17 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/679e3fac-8c84-4e07-b102-82945b9bcfa1">
 
 ### sudo exportfs -arv
+<img width="835" alt="Screen Shot 2023-08-13 at 1 24 52 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5727eb73-077d-457a-b5bd-4d033942a3b7">
 
 Check which port is used by NFS and open it using Security Groups (add new Inbound Rule)
 ### rpcinfo -p | grep nfs
       
 
 ## Important note: In order for NFS server to be accessible from your client, you must also open following ports: TCP 111, UDP 111, UDP 2049
-
+<img width="1278" alt="Screen Shot 2023-08-13 at 1 23 10 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b2c3dfba-8823-4bc0-a21c-9f399a42abc4">
 
 
 ## STEP 2 — CONFIGURE THE DATABASE SERVER
@@ -131,8 +133,8 @@ Create a database and name it tooling
 ### sudo mysql
 ### create database tooling
 
-Create a database user and name it webaccess
-Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+Create a database user and name it webaccess,
+grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
 ![Screen Shot 2023-08-13 at 12 34 57 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3d5a96ce-0bb6-4a18-a064-c4e7d781e8dc)
 ![Screen Shot 2023-08-13 at 12 35 53 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1208564f-dde4-48e6-a142-1627c2c04192)
 ### create user 'webaccess'@'172.31.80.0/20' identified by 'password';
@@ -148,22 +150,31 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 During the next steps we will do following:
 
-Configure NFS client (this step must be done on all three servers)
-Deploy a Tooling application to our Web Servers into a shared NFS folder
-Configure the Web Servers to work with a single MySQL database
+#### Configure NFS client (this step must be done on all three servers)
+
+#### Deploy a Tooling application to our Web Servers into a shared NFS folder
+#### Configure the Web Servers to work with a single MySQL database
+
 Launch a new EC2 instance with RHEL 8 Operating System
 Install NFS client
-sudo yum install nfs-utils nfs4-acl-tools -y
-Mount /var/www/ and target the NFS server’s export for apps
-sudo mkdir /var/www
-sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
-Verify that NFS was mounted successfully by running df -h. Make sure that the changes will persist on Web Server after reboot:
-sudo vi /etc/fstab
-add following line
 
-<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+### sudo yum install nfs-utils nfs4-acl-tools -y
+
+Mount /var/www/ and target the NFS server’s export for apps
+### sudo mkdir /var/www
+### sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
+
+Verify that NFS was mounted successfully by running df -h.
+![Screen Shot 2023-08-13 at 1 42 07 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/d959903b-70ba-4548-90bd-e6d002fad8df)
+
+Make sure that the changes will persist on Web Server after reboot:
+### sudo vi /etc/fstab
+add following line
+NFS-Server-Private-IP-Address:/mnt/apps /var/www nfs defaults 0 0
+<img width="826" alt="Screen Shot 2023-08-13 at 1 49 31 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0406bc64-1921-42fe-a181-866fdb6fdb27">
+
 Install Remi’s repository, Apache and PHP
-sudo yum install httpd -y
+### sudo yum install httpd -y
 
 sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
