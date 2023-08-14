@@ -11,17 +11,29 @@ The tools we want our team to be able to use are well known and widely used by m
 #### Kibana – Kibana is a free and open user interface that lets you visualize your Elasticsearch data and navigate the Elastic Stack.
 
 ## Side Self Study
-Read about Network-attached storage (NAS), Storage Area Network (SAN) and related protocols like NFS, (s)FTP, SMB, iSCSI. Explore what Block-level storage is and how it is used by Cloud Service providers, know the difference from Object storage.
+Read about Network-attached storage (NAS) (https://en.wikipedia.org/wiki/Network-attached_storage), 
+Storage Area Network (SAN) (https://en.wikipedia.org/wiki/Storage_area_network) and related protocols like NFS, (s)FTP, SMB, iSCSI. 
+Explore what Block-level storage is (https://en.wikipedia.org/wiki/Block-level_storage) and how it is used by Cloud Service providers, know the difference from Object storage (https://en.wikipedia.org/wiki/Object_storage).
 On the example of AWS services understand the difference between Block Storage, Object Storage and Network File System.
 
 In this project you will implement a solution that consists of following components:
 
 Infrastructure: AWS
+
 Webserver Linux: Red Hat Enterprise Linux 8
+
 Database Server: Ubuntu 20.04 + MySQL
+
 Storage Server: Red Hat Enterprise Linux 8 + NFS Server
+
 Programming Language: PHP
+
 Code Repository: GitHub
+
+It is important to know what storage solution is suitable for what use cases, for this – you need to answer following questions: what data will be stored, in what format, how this data will be accessed, by whom, from where, how frequently, etc. Base on this you will be able to choose the right storage system for your solution.
+
+For Rhel 8 server use this ami RHEL-8.6.0_HVM-20220503-x86_64-2-Hourly2-GP2
+![Screen Shot 2023-08-14 at 11 44 43 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c95305fa-6de7-4912-9f63-dd820855a2ac)
 
 ## Step 1 – Prepare NFS Server
 Spin up 4 new EC2 instance with RHEL Linux 8 Operating System. (one instance for your NFS server and the remaining 3 for webservers 1,2 & 3)
@@ -133,10 +145,11 @@ Create a database and name it tooling
 ### sudo mysql
 ### create database tooling
 
-Create a database user and name it webaccess,
-grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+#Create a database user and name it webaccess, grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+
 ![Screen Shot 2023-08-13 at 12 34 57 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3d5a96ce-0bb6-4a18-a064-c4e7d781e8dc)
 ![Screen Shot 2023-08-13 at 12 35 53 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1208564f-dde4-48e6-a142-1627c2c04192)
+
 ### create user 'webaccess'@'172.31.80.0/20' identified by 'password';
 ### grant all privileges on tooling.* to 'webaccess'@'172.31.80.0/20';
 ### flush privileges;
