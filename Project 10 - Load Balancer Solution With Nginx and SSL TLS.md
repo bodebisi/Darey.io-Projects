@@ -14,4 +14,5 @@ SSL/TLS uses digital certificates to identify and validate a Website. A browser 
 This project consists of two parts:
 
 Configure Nginx as a Load Balancer
+
 Register a new domain name and configure secured connection using SSL/TLS certificates
