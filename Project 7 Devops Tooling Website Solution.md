@@ -53,7 +53,7 @@ Run the LVM package
 ### sudo yum install lvm2 -y
 ### sudo lvmdiskscan
 
-Now create the physical volumes with pvcreate
+#Now create the physical volumes with pvcreate
 ### sudo pvcreate /dev/xvdf1 
 ### sudo pvcreate /dev/xvdg1
 ### sudo pvcreate /dev/xvdh1
@@ -131,7 +131,8 @@ Check which port is used by NFS and open it using Security Groups (add new Inbou
 ### rpcinfo -p | grep nfs
       
 
-## Important note: In order for NFS server to be accessible from your client, you must also open following ports: TCP 111, UDP 111, UDP 2049
+## Important note: In order for NFS server to be accessible from your client, you must also open following ports: TCP 111, UDP 111, UDP 2049 with the Subnet-CIDR
+
 <img width="1278" alt="Screen Shot 2023-08-13 at 1 23 10 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b2c3dfba-8823-4bc0-a21c-9f399a42abc4">
 
 
@@ -143,17 +144,19 @@ Install MySQL server
 
 Create a database and name it tooling
 ### sudo mysql
-### create database tooling
+### create database tooling;
 
 #Create a database user and name it webaccess, grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
 
 ![Screen Shot 2023-08-13 at 12 34 57 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3d5a96ce-0bb6-4a18-a064-c4e7d781e8dc)
 ![Screen Shot 2023-08-13 at 12 35 53 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1208564f-dde4-48e6-a142-1627c2c04192)
 
-### create user 'webaccess'@'172.31.80.0/20' identified by 'password';
-### grant all privileges on tooling.* to 'webaccess'@'172.31.80.0/20';
+### create user 'webaccess'@'172.31.32.0/20' identified by 'password';
+### grant all privileges on tooling.* to 'webaccess'@'172.31.32.0/20';
 ### flush privileges;
 ### show databases;
+
+![Screen Shot 2023-08-15 at 12 41 12 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c68a4db8-fc51-4ef7-9d61-1cae5545962b)
 
 ## Step 3 — Prepare the Web Servers
 We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.
@@ -161,7 +164,7 @@ You already know that one DB can be accessed for reads and writes by multiple cl
 
 This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved.
 
-During the next steps we will do following:
+#During the next steps we will do following:
 
 #### Configure NFS client (this step must be done on all three servers)
 
