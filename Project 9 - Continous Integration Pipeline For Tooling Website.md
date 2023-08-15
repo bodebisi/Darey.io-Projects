@@ -64,15 +64,24 @@ The installation is completed!(pic)
 In this part, you will learn how to configure a simple Jenkins job/project (these two terms can be used interchangeably). This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve codes from GitHub and store it locally on Jenkins server.
 
 #Enable webhooks in your GitHub repository settings 
-        
 
+![Screen Shot 2023-08-15 at 5 29 22 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/dbab6297-6a79-413d-a269-1b2680a5e296)
+        
 Go to Jenkins web console, click “New Item” and create a “Freestyle project”
+
+<img width="1273" alt="Screen Shot 2023-08-15 at 5 32 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/972d2424-e257-4c6d-9e30-05d9a1715d1f">
+
+<img width="1276" alt="Screen Shot 2023-08-15 at 5 34 49 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/92598ca1-7a7b-4476-90d4-2433023e0abf">
         
-#To connect your GitHub repository, you will need to provide its URL, you can copy from the repository itself (pic)
+#To connect your GitHub repository, you will need to provide its URL, you can copy from the repository itself 
 
+<img width="1279" alt="Screen Shot 2023-08-15 at 5 39 16 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c80616d2-25b0-47ef-b65b-686d66e8cc4e">
  
-In configuration of your Jenkins freestyle project choose Git repository, provide there the link to your Tooling GitHub repository and credentials (user/password) so Jenkins could access files in the repository. (pic)
+In configuration of your Jenkins freestyle project choose Git repository, provide there the link to your Tooling GitHub repository and credentials (user/password) so Jenkins could access files in the repository. 
 
+<img width="1276" alt="Screen Shot 2023-08-15 at 5 47 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/59134ca0-bcf8-4381-b0ba-5b9ac1147b43">
+
+<img width="1277" alt="Screen Shot 2023-08-15 at 5 49 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a724c512-ec08-46c6-b4df-20116a1382fe">
  
 Save the configuration and let us try to run the build. For now we can only do it manually.
 Click “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under #1 (pic)
