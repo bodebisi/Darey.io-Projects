@@ -24,8 +24,8 @@ Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it “Jenkins
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
     /etc/apt/sources.list.d/jenkins.list'
-sudo apt update
-sudo apt-get install jenkins
+### sudo apt update
+### sudo apt-get install jenkins
 
 #Make sure Jenkins is up and running
 ### sudo systemctl status jenkins
@@ -57,7 +57,7 @@ The installation is completed!
 
 ![Screen Shot 2023-08-15 at 5 17 04 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5ba1132b-1f81-4746-8769-9d7e6d891f63)
 
-##Step 2 – Configure Jenkins to retrieve source codes from GitHub using Webhooks
+## Step 2 – Configure Jenkins to retrieve source codes from GitHub using Webhooks
 In this part, you will learn how to configure a simple Jenkins job/project (these two terms can be used interchangeably). This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve codes from GitHub and store it locally on Jenkins server.
 
 #Enable webhooks in your GitHub repository settings 
