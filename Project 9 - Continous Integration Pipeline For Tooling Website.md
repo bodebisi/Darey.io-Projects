@@ -120,7 +120,7 @@ You will see that a new build has been launched automatically (by webhook) and y
 
 ![Screen Shot 2023-08-15 at 12 44 39 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8ef3992a-3196-4df2-8fe1-273068467718)
 
-![Screen Shot 2023-08-15 at 12 46 56 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/da42f492-40e3-4e50-ab06-c90ff6a7f024)
+![Screen Shot 2023-08-15 at 12 50 51 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5f3bcd75-9248-4954-b412-3cd8e7445f20)
 
 ![Screen Shot 2023-08-15 at 12 47 18 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/93eae549-7e01-4f0e-96c7-097bcf5d9e63)
 
@@ -130,14 +130,17 @@ By default, the artifacts are stored on Jenkins server locally
 
 ### ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
+![Screen Shot 2023-08-15 at 1 07 29 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/497594f2-7722-4c2c-bd81-e2d23a1783e5)
+
 ## Step 3 – Configure Jenkins to copy files to NFS server via SSH
 Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
 Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called “Publish Over SSH”.
 
 #Install “Publish Over SSH” plugin.
 On main dashboard select “Manage Jenkins” and choose “Manage Plugins” menu item.
-On “Available” tab search for “Publish Over SSH” plugin and install it (pic)
+On “Available” tab search for “Publish Over SSH” plugin and install it 
 
+<img width="1280" alt="Screen Shot 2023-08-15 at 1 12 16 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f72fecf9-4bf5-4d46-912d-628db5341781">
 
 #Configure the job/project to copy artifacts over to NFS server.
 On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
