@@ -84,23 +84,38 @@ In configuration of your Jenkins freestyle project choose Git repository, provid
 <img width="1277" alt="Screen Shot 2023-08-15 at 5 49 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a724c512-ec08-46c6-b4df-20116a1382fe">
  
 Save the configuration and let us try to run the build. For now we can only do it manually.
-Click “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under #1 (pic)
 
- 
+Click “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under #1 
+
 You can open the build and check in “Console Output” if it has run successfully.
+
+![Screen Shot 2023-08-15 at 6 06 33 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e176edc2-f737-4fea-b2bd-d95d039fb1c7)
+
 If so – congratulations! You have just made your very first Jenkins build!
 
 But this build does not produce anything and it runs only when we trigger it manually. Let us fix it.
 
 Click “Configure” your job/project and add these two configurations
-Configure triggering the job from GitHub webhook: (pic)
+Configure triggering the job from GitHub webhook: 
 
-    
-Configure “Post-build Actions” to archive all the files – files resulted from a build are called “artifacts”.(pic)
+<img width="1275" alt="Screen Shot 2023-08-15 at 6 12 00 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8de1334a-7df5-45d2-8875-3d6b08b8862f">
 
+<img width="1269" alt="Screen Shot 2023-08-15 at 6 13 14 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/bb0a2749-40f0-4570-804d-c53cec82140b">
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 6 13 51 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/49df35cb-88ff-411e-bcce-17c4339095ca">
+
+<img width="1279" alt="Screen Shot 2023-08-15 at 6 15 56 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/56aea225-d8bf-4641-8496-def98f0d87dc">
+
+Configure “Post-build Actions” to archive all the files – files resulted from a build are called “artifacts”.
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 6 17 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/770c67ba-55e6-47ae-a6a2-5556c9ede0ca">
  
 Now, go ahead and make some change in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch.
-You will see that a new build has been launched automatically (by webhook) and you can see its results – artifacts, saved on Jenkins server.(pic)
+You will see that a new build has been launched automatically (by webhook) and you can see its results – artifacts, saved on Jenkins server. 
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 6 29 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c3531381-9c02-4c6e-b7b2-415f4e6a148d">
+
+
 
  
 You have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another (upstream), poll GitHub periodically and others.
