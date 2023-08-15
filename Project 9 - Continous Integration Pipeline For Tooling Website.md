@@ -142,38 +142,59 @@ On “Available” tab search for “Publish Over SSH” plugin and install it
 
 <img width="1280" alt="Screen Shot 2023-08-15 at 1 12 16 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f72fecf9-4bf5-4d46-912d-628db5341781">
 
+![Screen Shot 2023-08-15 at 1 27 53 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c889dafe-1dd6-4281-b572-0f03f70826c1)
+
 #Configure the job/project to copy artifacts over to NFS server.
 On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
 
+<img width="1270" alt="Screen Shot 2023-08-15 at 1 31 53 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e9f82321-c557-4e7c-bc9e-af33203740d0">
+
 Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
 
-Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
-Arbitrary name
-Hostname – can be private IP address of your NFS server
-Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
-Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
-Test the configuration and make sure the connection returns Success.(pic)
-Remember, that TCP port 22 on NFS server must be open to receive SSH connections.(pic)
+![Screen Shot 2023-08-15 at 2 20 30 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5278f14f-e4b8-4acc-8de6-2e3badadaaef)
 
+Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
+
+Arbitrary name
+
+Hostname – can be private IP address of your NFS server
+
+Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
+
+Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+
+Test the configuration and make sure the connection returns Success.
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 2 10 20 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/108b3800-6613-4b9b-8d05-0ccf8c5cf571">
+
+Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
     
 Save the configuration, open your Jenkins job/project configuration page and add another one “Post-build Action”(pic)
 
  
 Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories – so we use **.
-If you want to apply some particular pattern to define which files to send – use this syntax.(pic)
 
- 
-Save this configuration and go ahead, change something in README.MD file in your GitHub Tooling repository.
+<img width="1280" alt="Screen Shot 2023-08-15 at 2 28 18 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9e3342e7-7948-4ff7-940a-e9730a40b236">
 
-Webhook will trigger a new job and in the “Console Output” of the job you will find something like this: (pic)
+If you want to apply some particular pattern to define which files to send – use this syntax.
+Save this configuration and go ahead, change something in README.MD file in your GitHub Tooling repository
 
-SSH: Transferred 25 file(s)
-Finished: SUCCESS
+<img width="1280" alt="Screen Shot 2023-08-15 at 2 32 22 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/10f61454-ab1d-49d9-a5b7-45a62f820fae">
+
+Webhook will trigger a new job and in the “Console Output” of the job you will find something like this: 
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 3 23 45 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/cca16152-2fcc-449a-bb63-269110ee0b3b">
 
 To make sure that the files in /mnt/apps have been updated – connect via SSH/Putty to your NFS server and check README.MD file
 ### cat /mnt/apps/README.md
 
-If you see the changes you had previously made in your GitHub – the job works as expected.
+If you see the changes you had previously made in your GitHub – the job works as expected. But it not run this on your NFS server and try again.
+
+![Screen Shot 2023-08-15 at 3 17 42 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7779949c-54b1-476c-8115-7c298e94ad44)
+
+It should be working now
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 3 24 06 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2eaba544-08fb-49fc-bff7-022fbeb7e8c2">
 
 # Congratulations!
 You have just implemented your first Continuous Integration solution using Jenkins CI. Watch out for advanced CI configurations in upcoming projects.
