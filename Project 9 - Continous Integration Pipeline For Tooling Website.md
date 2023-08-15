@@ -17,17 +17,14 @@ Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it “Jenkins
 
 #Install JDK (since Jenkins is a Java-based application)
 ### sudo apt update
-### sudo apt install default-jdk-headless -y
+### sudo apt install default-jdk-headless
 
 #Install Jenkins
 
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
     /etc/apt/sources.list.d/jenkins.list'
-    
 sudo apt update
-
 sudo apt-get install jenkins
 
 #Make sure Jenkins is up and running
@@ -40,7 +37,7 @@ By default Jenkins server uses TCP port 8080 – open it by creating a new Inbou
 <img width="1277" alt="Screen Shot 2023-08-15 at 5 01 49 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f8bbe244-35c7-43c8-a1dc-a57c958dca2b">
         
 #Perform initial Jenkins setup.
-From your browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+From your browser access http://Jenkins-Server-Public-IP-Address-or-Public-DNS-Name:8080
 
 You will be prompted to provide a default admin password
 
@@ -56,7 +53,7 @@ Then you will be asked which plugins to install – choose suggested plugins.
 Once plugins installation is done – create an admin user and you will get your Jenkins server address.
 
 <img width="1280" alt="Screen Shot 2023-08-15 at 5 13 09 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/294370ce-dbb7-4074-a0d1-55d943426c19">
-The installation is completed!(pic)
+The installation is completed!
 
 ![Screen Shot 2023-08-15 at 5 17 04 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5ba1132b-1f81-4746-8769-9d7e6d891f63)
 
@@ -65,31 +62,35 @@ In this part, you will learn how to configure a simple Jenkins job/project (thes
 
 #Enable webhooks in your GitHub repository settings 
 
-![Screen Shot 2023-08-15 at 5 29 22 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/dbab6297-6a79-413d-a269-1b2680a5e296)
+<img width="1280" alt="Screen Shot 2023-08-15 at 11 55 50 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3194783b-ab79-4d7b-bce9-44c413507f26">
         
 Go to Jenkins web console, click “New Item” and create a “Freestyle project”
 
 <img width="1273" alt="Screen Shot 2023-08-15 at 5 32 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/972d2424-e257-4c6d-9e30-05d9a1715d1f">
 
 <img width="1276" alt="Screen Shot 2023-08-15 at 5 34 49 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/92598ca1-7a7b-4476-90d4-2433023e0abf">
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 12 11 28 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/58963d81-d996-4c52-9395-dc68877f32db">
         
 #To connect your GitHub repository, you will need to provide its URL, you can copy from the repository itself 
 
-<img width="1279" alt="Screen Shot 2023-08-15 at 5 39 16 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c80616d2-25b0-47ef-b65b-686d66e8cc4e">
+<img width="1280" alt="Screen Shot 2023-08-15 at 12 13 18 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/48223df3-7830-45b5-8654-58fb5f967995">
  
 In configuration of your Jenkins freestyle project choose Git repository, provide there the link to your Tooling GitHub repository and credentials (user/password) so Jenkins could access files in the repository. 
 
 <img width="1276" alt="Screen Shot 2023-08-15 at 5 47 28 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/59134ca0-bcf8-4381-b0ba-5b9ac1147b43">
 
-<img width="1277" alt="Screen Shot 2023-08-15 at 5 49 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a724c512-ec08-46c6-b4df-20116a1382fe">
- 
+![Screen Shot 2023-08-15 at 12 24 37 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/41457eae-9137-4d85-b78d-bdc2884930fe)
+
 Save the configuration and let us try to run the build. For now we can only do it manually.
 
 Click “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under #1 
 
+![Screen Shot 2023-08-15 at 12 27 00 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/64572b62-9618-49a9-8e7a-49f2cca8c80c)
+
 You can open the build and check in “Console Output” if it has run successfully.
 
-![Screen Shot 2023-08-15 at 6 06 33 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e176edc2-f737-4fea-b2bd-d95d039fb1c7)
+![Screen Shot 2023-08-15 at 12 29 34 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/fc597c93-7631-471e-8417-19979aff6f0f)
 
 If so – congratulations! You have just made your very first Jenkins build!
 
@@ -113,11 +114,16 @@ Configure “Post-build Actions” to archive all the files – files resulted f
 Now, go ahead and make some change in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch.
 You will see that a new build has been launched automatically (by webhook) and you can see its results – artifacts, saved on Jenkins server. 
 
-<img width="1280" alt="Screen Shot 2023-08-15 at 6 29 11 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c3531381-9c02-4c6e-b7b2-415f4e6a148d">
+![Screen Shot 2023-08-15 at 12 38 39 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/900a4bc6-3f24-4849-a3b1-1fd99d818f57)
 
+![Screen Shot 2023-08-15 at 12 40 07 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/309c8469-ad8f-4486-8fea-640561cad1ec)
 
+![Screen Shot 2023-08-15 at 12 44 39 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8ef3992a-3196-4df2-8fe1-273068467718)
 
- 
+![Screen Shot 2023-08-15 at 12 46 56 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/da42f492-40e3-4e50-ab06-c90ff6a7f024)
+
+![Screen Shot 2023-08-15 at 12 47 18 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/93eae549-7e01-4f0e-96c7-097bcf5d9e63)
+
 You have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another (upstream), poll GitHub periodically and others.
 
 By default, the artifacts are stored on Jenkins server locally
