@@ -178,9 +178,10 @@ Install NFS client
 
 Mount /var/www/ and target the NFS server’s export for apps
 ### sudo mkdir /var/www
-### sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
+### sudo mount -t nfs -o rw,nosuid NFS-Server-Private-IP-Address:/mnt/apps /var/www
 
 Verify that NFS was mounted successfully by running df -h.
+
 ![Screen Shot 2023-08-13 at 1 42 07 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/d959903b-70ba-4548-90bd-e6d002fad8df)
 
 Make sure that the changes will persist on Web Server after reboot:
@@ -198,19 +199,25 @@ Install Remi’s repository, Apache and PHP
 ### sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
 ### sudo systemctl start php-fpm
 ### sudo systemctl enable php-fpm
-### setsebool -P httpd_execmem 1
+### sudo setsebool -P httpd_execmem 1
 
 Repeat steps 1-5 for another 2 Web Servers.
 
 Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files – it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other Web Servers.
-### sudo mount -t nfs -o rw,nosuid 172.31.87.96:/mnt/logs /var/log/httpd
 
-Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
+Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs.
+### ls /var/log/  (to find the apache folder httpd)
+###  sudo ls /var/log/httpd/  (to view the content in the folder)
+
+Repeat step №4 to make sure the mount point will persist after reboot.
+### sudo mount -t nfs -o rw,nosuid NFS-Server-Private-IP-Address :/mnt/apps /var/logs /var/log/httpd
 ### sudo vi /etc/fstab
-#### 172.31.87.96:/mnt/logs /var/log/httpd nfs defaults 0 0
-#### esc + wqa!
+#### NFS-Server-Private-IP-Address:/mnt/logs /var/log/httpd nfs defaults 0 0
 
-Fork the tooling source code from Darey.io Github Account to your Github account.
+<img width="717" alt="Screen Shot 2023-08-15 at 1 52 25 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/149d5318-49f1-4485-ab01-2eaa64f03732">
+
+Fork the tooling source code from Darey.io Github Account https://github.com/darey-io/tooling.git to your Github account.
+(Learn how to fork a repo https://youtu.be/f5grYMXbAV0
 
 ![Screen Shot 2023-08-13 at 2 46 06 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e85955d8-8aa0-4ab7-8df1-bf26078bcfda)
 
@@ -221,11 +228,15 @@ Fork the tooling source code from Darey.io Github Account to your Github account
 ### cd tooling
 
 Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+
+### ls /var/www/ (to confirm there's an html directory)
 ### sudo cp -R html/. /var/www/html
+### ls (to view the changes)
 
 ## Note 1: Do not forget to open TCP port 80 on the Web Server.
 
 ## Note 2: If you encounter 403 Error – check permissions to your /var/www/html folder and also disable SELinux 
+### cd ..
 ### sudo setenforce 0
 
 To make this change permanent – open following config file 
@@ -236,6 +247,7 @@ and set SELINUX=disabled then restrt httpd.
 
 ### sudo systemctl start httpd
 ### sudo systemctl status httpd
+
 ![Screen Shot 2023-08-13 at 3 13 27 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4da76f14-9d81-4e9c-a090-5d4ab1c67a29)
         
 Update the website’s configuration to connect to the database (in /var/www/html/functions.php file).
@@ -245,11 +257,17 @@ Update the website’s configuration to connect to the database (in /var/www/htm
 Apply tooling-db.sql script to your database using this command 
 ### cd tooling
 ### sudo yum install mysql -y
-### mysql -h <databse-private-ip> -u <db-username> -p <db-password> tooling < tooling-db.sql
+### mysql -h databse-private-ip -u db-username -p tooling < tooling-db.sql
 
 If you encounter any error:
 Make sure mysql security group is opened in your DB server.
-then go to your DB server and edit the bind address 
+
+<img width="1042" alt="Screen Shot 2023-08-15 at 2 40 20 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5fc9c76d-2add-49a9-b599-eee433e4b71b">
+
+<img width="1280" alt="Screen Shot 2023-08-15 at 2 41 45 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3584483b-7375-4a12-9afa-bd9ec9db054e">
+
+then go to your DB server and edit the bind address to 0.0.0.0 and restart mysql
+
 ### sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 
 ![Screen Shot 2023-08-13 at 3 41 31 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8366fd7d-aee6-4b8c-83c8-e8e67b84fcae)
@@ -261,6 +279,10 @@ Create in MySQL a new admin user with username: myuser and password: password:
 INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
 -> (1, ‘admin’, ‘21232f297a57a5a743894a0e4a801fc3’, ‘dare@dare.com’, ‘admin’, ‘1’);
 
+if you run this command again in your webservers, there shouldn't be any error.
+### mysql -h databse-private-ip -u db-username -p tooling < tooling-db.sql
+
+Now finish mysql confifgurations on your DB server.
 ### sudo mysql
 #### show databases;
 #### use tooling;
@@ -271,7 +293,7 @@ INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, 
 
 <img width="910" alt="Screen Shot 2023-08-13 at 4 17 36 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/697b85bc-9f9c-42ac-845c-0c187b6508c7">
 
-#### Open the website in your browser http://Web-Server-Public-IP-Address-or-Public-DNS-Name/index.php and make sure you can login into the website with myuser user.
+#### Open the website in your browser http://Web-Server-Public-IP-Address-or-Public-DNS-Name/index.php and you can login into the website with admin admin.
 
 ![Screen Shot 2023-08-13 at 3 57 00 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3c21bd79-2ad5-46dc-bc4c-df1faa41655e)
 
