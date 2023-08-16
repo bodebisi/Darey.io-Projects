@@ -1,14 +1,18 @@
 # LOAD BALANCER SOLUTION WITH NGINX AND SSL/TLS
 
-When data is moving between a client (browser) and a Web Server over the Internet – it passes through multiple network devices and, if the data is not encrypted, it can be relatively easy intercepted by someone who has access to the intermediate equipment. This kind of information security threat is called Man-In-The-Middle (MIMT) attack.
+It is also extremely important to ensure that connections to your Web solutions are secure and information is encrypted in transit(https://security.berkeley.edu/data-encryption-transit-guideline) – we will also cover connection over secured HTTP (HTTPS protocol), its purpose and what is required to implement it.
 
-This threat is real – users that share sensitive information (bank details, social media access credentials, etc.) via non-secured channels, risk their data to be compromised and used by cybercriminals.
+When data is moving between a client (browser) and a Web Server over the Internet – it passes through multiple network devices and, if the data is not encrypted, it can be relatively easy intercepted by someone who has access to the intermediate equipment. This kind of information security threat is called Man-In-The-Middle (MIMT) attack. https://en.wikipedia.org/wiki/Man-in-the-middle_attack
+
+This threat is real – users that share sensitive information (bank details, social media access credentials, etc.) via non-secured channels, risk their data to be compromised and used by cybercriminals. https://www.trendmicro.com/vinfo/us/security/definition/cybercriminals
 
 SSL and its newer version, TSL – is a security technology that protects connection from MITM attacks by creating an encrypted session between browser and Web server. Here we will refer this family of cryptographic protocols as SSL/TLS – even though SSL was replaced by TLS, the term is still being widely used.
 
-SSL/TLS uses digital certificates to identify and validate a Website. A browser reads the certificate issued by a Certificate Authority (CA) to make sure that the website is registered in the CA so it can be trusted to establish a secured connection.
+SSL/TLS uses digital certificates (https://en.wikipedia.org/wiki/Public_key_certificate) to identify and validate a Website. A browser reads the certificate issued by a Certificate Authority (https://en.wikipedia.org/wiki/Certificate_authority) to make sure that the website is registered in the CA so it can be trusted to establish a secured connection. 
 
-#In this project you will register your website with LetsEnrcypt Certificate Authority, to automate certificate issuance you will use a shell client recommended by LetsEncrypt – cetrbot.
+There are different types of SSL/TLS certificates – you can learn more about them here(https://blog.hubspot.com/marketing/what-is-ssl). You can also watch a tutorial on how SSL works here(https://youtu.be/T4Df5_cojAs) or an additional resource here (https://youtu.be/SJJmoDZ3il8)
+
+#In this project you will register your website with LetsEnrcypt (https://letsencrypt.org/) Certificate Authority, to automate certificate issuance you will use a shell client recommended by LetsEncrypt – cetrbot.(https://certbot.eff.org/)
 
 ## Side Self Study: 
 Read more about HTTP load balancing methods and features supported by Nginx https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/
