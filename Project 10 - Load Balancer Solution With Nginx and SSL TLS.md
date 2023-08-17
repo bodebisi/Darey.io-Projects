@@ -38,12 +38,15 @@ Update /etc/hosts file for local DNS with Web Servers’ names (e.g. Web1 and We
 Install and configure Nginx as a load balancer to point traffic to the resolvable DNS names of the webservers (pic)
 
 Update the instance and Install Nginx
-### sudo apt update
-### sudo apt install nginx
+### sudo apt update -y
+### sudo apt install nginx -y
+### sudo systemctl enable nginx && sudo systemctl start nginx
+### sudo systemctl status nginx
 
-Configure Nginx LB using Web Servers’ names defined in /etc/hosts (pic)
+Configure Nginx LB using Web Servers’ names defined in /etc/hosts 
+#Hint: Read this blog(https://linuxize.com/post/how-to-edit-your-hosts-file/) to read about /etc/host
 
-Open the default nginx configuration file
+#Open the default nginx configuration file
 ### sudo vi /etc/nginx/nginx.conf
 
 #insert following configuration into http section
@@ -62,7 +65,12 @@ server {
   }
 
 #comment out this line
-#       include /etc/nginx/sites-enabled/*;
+      include /etc/nginx/sites-enabled/*;
+
+<img width="722" alt="Screen Shot 2023-08-17 at 12 13 35 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f5edca26-1dee-48fe-936d-0530e7c848b5">
+
+### sudo nginx -t (to check for syntax ok)
+### ll
 
 Restart Nginx and make sure the service is up and running
 ### sudo systemctl restart nginx
@@ -85,6 +93,23 @@ Update A record in your registrar to point to Nginx LB using Elastic IP address 
 
 Learn how associate your domain name to your Elastic IP on this page. https://medium.com/progress-on-ios-development/connecting-an-ec2-instance-with-a-godaddy-domain-e74ff190c233
 
+<img width="1280" alt="Screen Shot 2023-08-17 at 9 10 40 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8c0685dd-dc97-47ab-be97-83f018fe04dd">
+
+<img width="1280" alt="Screen Shot 2023-08-17 at 9 43 50 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a82add49-2a31-4423-a1da-98fc51d785db">
+
+![Screen Shot 2023-08-17 at 1 13 35 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/75f68d13-85f7-4557-8f14-673fe8074e0a)
+
+<img width="1276" alt="Screen Shot 2023-08-17 at 9 25 14 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a6d0f633-b8e3-49c0-ba2b-3d5fb503e01a">
+
+<img width="1280" alt="Screen Shot 2023-08-17 at 9 25 47 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7dc2142a-e6fb-492a-86d3-a4c4afaf34ab">
+
+<img width="1277" alt="Screen Shot 2023-08-17 at 9 29 03 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/acbc81c3-3548-49e2-b9f2-8951f0551c63">
+
+![Screen Shot 2023-08-17 at 9 34 24 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/929567bd-bd01-4ca0-a96b-7698bea54720)
+
+<img width="1280" alt="Screen Shot 2023-08-17 at 9 40 37 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ecd5751d-389a-45ef-88c8-1d6696461071">
+
+<img width="1271" alt="Screen Shot 2023-08-17 at 9 41 52 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3a1ecd8f-2f97-42a2-bd6a-aad7a172ea05">
 
 Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol – http://<your-domain-name.com>
 
@@ -101,14 +126,24 @@ Install certbot and request for an SSL/TLS certificate
 ### sudo snap install --classic certbot
 
 Request your certificate (just follow the certbot instructions – you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it on step 4).
+
+### sudo apt install python3-certbot-nginx -y
+### sudo nginx -t && sudo nginx -s reload
+### sudo certbot --nginx -d  www.humus.site
 ### sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ### sudo certbot --nginx
 
 Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
 
+<img width="1280" alt="Screen Shot 2023-08-17 at 12 51 20 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5077312c-2244-4121-b9dc-48167aa1c953">
+
 You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string.
 
-Click on the padlock icon and you can see the details of the certificate issued for your website.(pic)
+![Screen Shot 2023-08-17 at 12 55 14 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4e65c8d3-9099-4ca8-8fee-dd28bc6507a7)
+
+Click on the padlock icon and you can see the details of the certificate issued for your website.
+
+![Screen Shot 2023-08-17 at 12 52 07 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a9cd1ef0-249e-4405-af3a-26108375dfb8)
 
 Set up periodical renewal of your SSL/TLS certificate
 By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
@@ -121,9 +156,13 @@ Best practice is to have a scheduled job that to run renew command periodically.
 To do so, lets edit the crontab file with the following command:
 ### crontab -e
 
+<img width="716" alt="Screen Shot 2023-08-17 at 1 03 44 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/fe0f7ecb-91c6-4da8-94f4-a2671b168570">
+
 Add following line:
 
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
+
+<img width="713" alt="Screen Shot 2023-08-17 at 1 01 53 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/84bed62b-953d-4b7c-8368-a8209ad11ed3">
 
 You can always change the interval of this cronjob if twice a day is too often by adjusting schedule expression.
 
