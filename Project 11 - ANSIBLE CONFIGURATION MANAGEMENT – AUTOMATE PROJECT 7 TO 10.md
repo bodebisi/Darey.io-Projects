@@ -18,8 +18,11 @@ Create a simple Ansible playbook to automate servers configuration
 
 ## INSTALL AND CONFIGURE ANSIBLE ON EC2 INSTANCE
 1. Update Name tag on your Jenkins EC2 Instance to Jenkins-Ansible (We will use this server to run playbooks)
-2. In your GitHub account create a new repository and name it ansible-config-mgt.
-3. Install Ansible
+
+<img width="1032" alt="Screen Shot 2023-08-30 at 9 33 12 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/602a4aed-181f-464c-82c0-a385197e451a">
+   
+3. In your GitHub account create a new repository and name it ansible-config-mgt.
+4. Install Ansible
 #### sudo apt update
 #### sudo apt install ansible
 Check your Ansible version by running 
