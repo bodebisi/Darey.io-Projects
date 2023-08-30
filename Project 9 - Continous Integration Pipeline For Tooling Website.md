@@ -16,16 +16,23 @@ Enhance the architecture prepared in Project 8 by adding a Jenkins server, confi
 Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it “Jenkins”
 
 #Install JDK (since Jenkins is a Java-based application)
-### sudo apt update
-### sudo apt install default-jdk-headless
+#### sudo apt update
+#### sudo apt install default-jdk-headless
 
 #Install Jenkins
 
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
     /etc/apt/sources.list.d/jenkins.list'
-### sudo apt update
-### sudo apt-get install jenkins
+sudo apt update
+sudo apt-get install jenkins
+
+If you encounter the error in the image below? 
+
+<img width="656" alt="Screen Shot 2023-08-30 at 8 59 34 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/f05adba1-029a-458b-bc18-4dbfc4443cf0">
+
+Insert your Pubkey (which is also highlighted) in the command below and install jenkins again.
+#### sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <the key>
 
 #Make sure Jenkins is up and running
 ### sudo systemctl status jenkins
@@ -48,11 +55,12 @@ Retrieve it from your server:
 
 <img width="1272" alt="Screen Shot 2023-08-15 at 5 06 47 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1394373b-ba27-4940-ba0f-db827185fc62">
 
-Then you will be asked which plugins to install – choose suggested plugins.
+Then you will be asked which plugins to install – choose install suggested plugins.
 
 Once plugins installation is done – create an admin user and you will get your Jenkins server address.
 
 <img width="1280" alt="Screen Shot 2023-08-15 at 5 13 09 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/294370ce-dbb7-4074-a0d1-55d943426c19">
+
 The installation is completed!
 
 ![Screen Shot 2023-08-15 at 5 17 04 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5ba1132b-1f81-4746-8769-9d7e6d891f63)
