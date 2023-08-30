@@ -28,6 +28,8 @@ Create a simple Ansible playbook to automate servers configuration
 Check your Ansible version by running 
 #### ansible --version
 
+<img width="709" alt="Screen Shot 2023-08-30 at 9 51 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/576985f8-31af-402f-a05d-70b76b33ee68">
+
 4. Configure Jenkins build job to save your repository content every time you change it – this will solidify your Jenkins configuration skills acquired in Project 9.
 ##### Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository.
 ##### Configure Webhook in GitHub and set webhook to trigger ansible build.
