@@ -121,10 +121,12 @@ Update your inventory/dev.yml file with this snippet of code:
 
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
 In common.yml playbook you will write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure.
-Update your playbooks/common.yml file with following code: (Pic)
+Update your playbooks/common.yml file with following code:
+
+<img width="686" alt="Screen Shot 2023-08-31 at 11 47 06 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/348c66ed-3a84-4c8d-a3c9-06a494464ace">
 
 Examine the code above and try to make sense out of it. This playbook is divided into two parts, each of them is intended to perform the same task:
-install wireshark (https://en.wikipedia.org/wiki/Wireshark) utility (or make sure it is updated to the latest version) on your RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
+install wireshark utility (https://en.wikipedia.org/wiki/Wireshark), (make sure it is updated to the latest version) on your RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
 
 Feel free to update this playbook with following tasks:
 . Create a directory and a file inside it
@@ -147,7 +149,14 @@ Commit your code into GitHub:
 #### git add <selected files>
 #### git commit -m "commit message"
 
+<img width="1237" alt="Screen Shot 2023-09-01 at 12 05 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/66353d25-8c0c-4f6a-a49a-871ae439e976">
+
 2. Create a Pull request (PR)
+
+<img width="1280" alt="Screen Shot 2023-09-01 at 12 07 06 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/22f4b169-57a3-42af-a9fe-efbcbc279f78">
+
+![Screen Shot 2023-09-01 at 12 12 25 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3bfcd11d-c4a4-466e-b814-97d17b53e1b2)
+
 3. Wear a hat of another developer for a second, and act as a reviewer.
 4. If the reviewer is happy with your new feature development, merge the code to the master branch.
 5. Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
