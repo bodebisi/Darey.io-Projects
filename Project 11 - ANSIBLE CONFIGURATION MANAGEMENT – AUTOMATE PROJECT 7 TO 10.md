@@ -35,11 +35,19 @@ Check your Ansible version by running
 ##### Configure Webhook in GitHub and set webhook to trigger ansible build.
 ##### Configure a Post-build job to save all (**) files, like you did it in Project 9.
 
+<img width="1280" alt="Screen Shot 2023-08-30 at 10 24 42 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4f24a167-eb89-46e5-b2b5-70350f6cd6cd">
+
 5. Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
 #### ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 
+<img width="822" alt="Screen Shot 2023-08-30 at 10 40 44 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/fda807e9-d6f1-4555-a810-578c3a43b3fe">
+
+<img width="1274" alt="Screen Shot 2023-08-30 at 10 33 05 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c9ba2625-423b-4d1b-9033-773df2c8009a">
+
+<img width="721" alt="Screen Shot 2023-08-30 at 10 37 15 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8ebc55d2-bf86-46bd-9f60-43e75cc09427">
+
 #### Note: Trigger Jenkins project execution only for /main (master) branch.
-#### Tip Every time you stop/start your Jenkins-Ansible server – you have to reconfigure GitHub webhook to a new IP address, in order to avoid it, it makes sense to allocate an Elastic IP to your Jenkins-Ansible server (you have done it before to your LB server in Project 10). Note that Elastic IP is free only when it is being allocated to an EC2 Instance, so do not forget to release Elastic IP once you terminate your EC2 Instance.
+##### Tip: Every time you stop/start your Jenkins-Ansible server – you have to reconfigure GitHub webhook to a new IP address, in order to avoid it, it makes sense to allocate an Elastic IP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) to your Jenkins-Ansible server (you have done it before to your LB server in Project 10). Note that Elastic IP is free only when it is being allocated to an EC2 Instance, so do not forget to release Elastic IP once you terminate your EC2 Instance.
 
 ### Step 2 – Prepare your development environment using Visual Studio Code
 
@@ -53,11 +61,17 @@ Check your Ansible version by running
 
 1. In your ansible-config-mgt GitHub repos
 Tip: Give your branches descriptive and comprehensive names, for example, if you use Jira (https://www.atlassian.com/software/jira)  or Trello (https://trello.com/) as a project management tool – include ticket number (e.g. PRJ-145) in the name of your branch and add a topic and a brief description what this branch is about – a bugfix, hotfix, feature, release (e.g. feature/prj-145-lvm)
+
 2. Checkout the newly created feature branch to your local machine and start building your code and directory structure
-3. Create a directory and name it playbooks – it will be used to store all your playbook files.
-4. Create a directory and name it inventory – it will be used to keep your hosts organised.
-5. Within the playbooks folder, create your first playbook, and name it common.yml
+
+<img width="718" alt="Screen Shot 2023-08-30 at 11 39 24 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3ed0d905-5c5b-49e2-aa54-eabe91b7ab20">
+
+4. Create a directory and name it playbooks – it will be used to store all your playbook files.
+5. Create a directory and name it inventory – it will be used to keep your hosts organised.
+6. Within the playbooks folder, create your first playbook, and name it common.yml
 6 .Within the inventory folder, create an inventory file (.yml) for each environment (Development, Staging Testing and Production) dev, staging, uat, and prod respectively.
+
+<img width="679" alt="Screen Shot 2023-08-31 at 12 03 49 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7cd01d6d-bb86-4dd9-838a-fa024e8e8266">   
 
 ### Step 4 – Set up an Ansible Inventory
 
@@ -74,14 +88,31 @@ To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible inst
 #### eval `ssh-agent -s`
 #### ssh-add <path-to-private-key>
 
-Confirm the key has been added with the command below, you should see the name of your key
-#### ssh-add -l
+<img width="574" alt="Screen Shot 2023-08-31 at 12 02 31 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1ca31c70-3508-4ad4-b1a8-92d349e942a5">
 
 Now, ssh into your Jenkins-Ansible server using ssh-agent
 #### ssh -A ubuntu@public-ip
 
+Confirm the key has been added with the command below, you should see the name of your key
+#### ssh-add -l
+
+<img width="572" alt="Screen Shot 2023-08-31 at 12 12 10 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ad7e5bb0-7f04-45cf-a4a7-d48d1d85eabe">
+
+Spin up new instances with the same ansible (.pem) key
+
+<img width="1039" alt="Screen Shot 2023-08-31 at 11 30 33 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/002eeee7-8a6a-4eb7-97a5-21beb3286ce2">
+
 Also notice, that your Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
+
+Check to see if ansible can have access to these instances
+
+<img width="574" alt="Screen Shot 2023-08-31 at 11 28 55 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a92eb6ef-e446-421d-adc5-231066f3625b">
+
+![Screen Shot 2023-08-31 at 11 40 09 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/56904eb9-1e9c-4780-a0c9-28364d498d9b)
+
 Update your inventory/dev.yml file with this snippet of code: (Pic)
+
+
 
 ### Step 5 – Create a Common Playbook
 
