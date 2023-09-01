@@ -177,10 +177,26 @@ Now, it is time to execute ansible-playbook command and verify if your playbook 
 #### cd ansible-config-mgt
 #### ansible-playbook -i inventory/dev.yml playbooks/common.yml
 
-You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version (Pic)
+<img width="948" alt="Screen Shot 2023-09-01 at 2 28 59 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/11dcdc93-ec03-47c9-835b-9c325abaf85a">
+
+<img width="829" alt="Screen Shot 2023-09-01 at 2 29 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7170c000-6467-4647-821b-48c2c2e8892e">
+
+You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version 
+
+<img width="617" alt="Screen Shot 2023-09-01 at 2 35 15 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2f89d1c2-1513-407c-b875-6867187ca0b1">
+
+<img width="635" alt="Screen Shot 2023-09-01 at 2 34 47 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/a3026bb0-71a8-42fe-9e73-ff6e46dc4a03">
 
 ### Optional step – Repeat once again
 Update your ansible playbook with some new Ansible tasks and go through the full checkout -> change codes -> commit -> PR -> merge -> build -> ansible-playbook cycle again to see how easily you can manage a servers fleet of any size with just one command!
+
+<img width="1278" alt="Screen Shot 2023-09-01 at 3 16 57 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9cf05e79-1cae-4d15-b898-8318636c7f7b">
+
+<img width="808" alt="Screen Shot 2023-09-01 at 3 17 33 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b248852a-ce65-4511-9b4e-0438031b62e1">
+
+<img width="357" alt="Screen Shot 2023-09-01 at 3 23 29 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/292646da-b79b-4606-98d3-2a5f63293df6">
+
+<img width="1280" alt="Screen Shot 2023-09-01 at 3 18 05 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/60ad24f0-0618-4d8e-aa7c-a4a6c84c7899">
 
 # Congratulations
 You have just automated your routine tasks by implementing your first Ansible project! There is more exciting projects ahead, so lets keep it moving!
