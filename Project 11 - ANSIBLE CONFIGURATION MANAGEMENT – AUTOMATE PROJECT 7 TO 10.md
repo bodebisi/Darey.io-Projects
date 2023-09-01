@@ -157,13 +157,19 @@ Commit your code into GitHub:
 
 ![Screen Shot 2023-09-01 at 12 12 25 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3bfcd11d-c4a4-466e-b814-97d17b53e1b2)
 
+<img width="1280" alt="Screen Shot 2023-09-01 at 12 15 02 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ea342c45-5987-4361-bfcb-6bd50bf8feb4">
+
 3. Wear a hat of another developer for a second, and act as a reviewer.
 4. If the reviewer is happy with your new feature development, merge the code to the master branch.
 5. Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
 
+![Screen Shot 2023-09-01 at 12 23 09 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/524c8f8f-784b-43ae-9bb7-600d5337f9cd)   
+
 Once your code changes appear in master branch – Jenkins will do its job and save all the files (build artifacts) to 
 #### /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ 
 directory on Jenkins-Ansible server.
+
+<img width="570" alt="Screen Shot 2023-09-01 at 12 18 37 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/aa1e050d-14e1-4f07-8f6e-e26f593f25e3">
 
 ### Step 7 – Run first Ansible test
 
