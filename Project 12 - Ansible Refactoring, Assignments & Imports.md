@@ -108,4 +108,31 @@ After removing unnecessary directories and files, the roles structure should loo
 
 <img width="729" alt="Screen Shot 2023-09-04 at 9 43 08 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b8c35b64-125a-4770-aa27-3103faddece2">
 
+3. Update your inventory ansible-config-mgt/inventory/uat.yml file with IP addresses of your 2 UAT Web servers
+### NOTE:
+Ensure you are using ssh-agent to ssh into the Jenkins-Ansible instance just as you have done in project 11;
+
+To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible instance, please see this video:
+
+For Windows users – ssh-agent on windows (https://youtu.be/OplGrY74qog)
+
+For Linux users – ssh-agent on linux (https://youtu.be/OplGrY74qog)
+
+(Pic)
+
+4. In /etc/ansible/ansible.cfg file uncomment roles_path string and provide a full path to your roles directory roles_path    = /home/ubuntu/ansible-config-mgt/roles, so Ansible could know where to find configured roles.
+
+5. It is time to start adding some logic to the webserver role. Go into tasks directory, and within the main.yml file, start writing configuration tasks to do the following:
+
+   Install and configure Apache (httpd service)
+
+   Clone Tooling website from GitHub https://github.com/<your-name>/tooling.git.
+
+   Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers.
+
+   Make sure httpd service is started
+
+Your main.yml may consist of following tasks: (pic)
+
+### Step 4 – Reference ‘Webserver’ role
 
