@@ -31,6 +31,17 @@ Check your Ansible version by running
 <img width="709" alt="Screen Shot 2023-08-30 at 9 51 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/576985f8-31af-402f-a05d-70b76b33ee68">
 
 4. Configure Jenkins build job to save your repository content every time you change it – this will solidify your Jenkins configuration skills acquired in Project 9.
+
+sudo apt-get update
+  sudo apt-get install fontconfig openjdk-17-jre
+  curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
 ##### Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository.
 ##### Configure Webhook in GitHub and set webhook to trigger ansible build.
 ##### Configure a Post-build job to save all (**) files, like you did it in Project 9.
