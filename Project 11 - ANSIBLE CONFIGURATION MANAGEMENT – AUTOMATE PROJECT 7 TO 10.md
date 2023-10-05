@@ -32,7 +32,7 @@ Check your Ansible version by running
 
 4. Configure Jenkins build job to save your repository content every time you change it – this will solidify your Jenkins configuration skills acquired in Project 9.
 
-sudo apt-get update
+  sudo apt-get update
   sudo apt-get install fontconfig openjdk-17-jre
   curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -188,9 +188,11 @@ Now, it is time to execute ansible-playbook command and verify if your playbook 
 #### cd ansible-config-mgt
 #### ansible-playbook -i inventory/dev.yml playbooks/common.yml
 
-<img width="948" alt="Screen Shot 2023-09-01 at 2 28 59 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/11dcdc93-ec03-47c9-835b-9c325abaf85a">
+<img width="570" alt="Screen Shot 2023-10-05 at 5 39 14 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/783c3937-1d2b-477b-bb05-f875bb36b66d">
 
-<img width="829" alt="Screen Shot 2023-09-01 at 2 29 32 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/7170c000-6467-4647-821b-48c2c2e8892e">
+![Screen Shot 2023-10-05 at 5 45 09 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/ca1879ac-f921-4af1-a316-34c01c6e2829)
+
+<img width="815" alt="Screen Shot 2023-10-05 at 5 45 27 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/eea9ed73-6519-485f-80f3-948eb2dd6905">
 
 You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version 
 
