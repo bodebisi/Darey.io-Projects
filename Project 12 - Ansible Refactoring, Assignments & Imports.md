@@ -16,13 +16,22 @@ Before we begin, let us make some changes to our Jenkins job – now every new c
 1. Go to your Jenkins-Ansible server and create a new directory called ansible-config-artifact – we will store there all artifacts after each build.
 #### sudo mkdir /home/ubuntu/ansible-config-artifact   
 
+<img width="572" alt="Screen Shot 2023-10-10 at 8 03 33 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/06ebb0b8-284c-437b-9ad3-0c9790df3fda">
+
 2. Change permissions to this directory, so Jenkins could save files there
 #### chmod -R 0777 /home/ubuntu/ansible-config-artifact   
 
-3. Go to Jenkins web console -> Manage Jenkins -> Manage Plugins -> on Available tab search for Copy Artifact and install this plugin without restarting Jenkins (pic)
+<img width="577" alt="Screen Shot 2023-10-10 at 8 08 46 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1f9a9649-a4ba-490e-8ee2-41a60e263c3e">
 
-4. Create a new Freestyle project (refer to Project 9) and name it save_artifacts.
-5. This project will be triggered by completion of your existing ansible project. Configure it accordingly (pic)
+3. Go to Jenkins web console -> Manage Jenkins -> Manage Plugins -> on Available tab search for Copy Artifact and install this plugin without restarting Jenkins
+
+<img width="1279" alt="Screen Shot 2023-10-10 at 8 10 46 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3007b483-b0a0-4216-90b1-cb8f7c1afed7">
+
+4. Create a new Freestyle project on Jenkins and name it save_artifacts.
+
+
+ 
+6. This project will be triggered by completion of your existing ansible project. Configure it accordingly (pic)
 
 #### Note: 
 You can configure number of builds to keep in order to save space on the server, for example, you might want to keep only last 2 or 5 build results. You can also make this change to your ansible job.   
