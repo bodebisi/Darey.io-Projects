@@ -25,7 +25,8 @@ Create a simple Ansible playbook to automate servers configuration
 3. Install Ansible
 #### sudo apt update
 #### sudo apt install ansible
-Check your Ansible version by running 
+
+Check your Ansible version by running: 
 #### ansible --version
 
 <img width="709" alt="Screen Shot 2023-08-30 at 9 51 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/576985f8-31af-402f-a05d-70b76b33ee68">
@@ -42,13 +43,18 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins
 
+Confirm Jenkins status:
+#### sudo systemctl status jenkins 
+
+
+
 ##### Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository.
 ##### Configure Webhook in GitHub and set webhook to trigger ansible build.
 ##### Configure a Post-build job to save all (**) files, like you did it in Project 9.
 
 <img width="1280" alt="Screen Shot 2023-08-30 at 10 24 42 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/4f24a167-eb89-46e5-b2b5-70350f6cd6cd">
 
-5. Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
+5. Test your setup by making some change in README.MD file in main branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
 
 <img width="822" alt="Screen Shot 2023-08-30 at 10 40 44 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/fda807e9-d6f1-4555-a810-578c3a43b3fe">
 
