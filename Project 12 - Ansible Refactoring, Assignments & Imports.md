@@ -28,19 +28,32 @@ Before we begin, let us make some changes to our Jenkins job – now every new c
 <img width="1279" alt="Screen Shot 2023-10-10 at 8 10 46 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3007b483-b0a0-4216-90b1-cb8f7c1afed7">
 
 4. Create a new Freestyle project on Jenkins and name it save_artifacts.
+5. This project will be triggered by completion of your existing ansible project. Configure it accordingly
 
+<img width="487" alt="Screen Shot 2023-11-01 at 11 42 33 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9c8d7def-20e1-4fc2-9c91-b21d8ff5b15e">
 
- 
-6. This project will be triggered by completion of your existing ansible project. Configure it accordingly (pic)
 
 #### Note: 
 You can configure number of builds to keep in order to save space on the server, for example, you might want to keep only last 2 or 5 build results. You can also make this change to your ansible job.   
 
-6. The main idea of save_artifacts project is to save artifacts into /home/ubuntu/ansible-config-artifact directory. To achieve this, create a Build step and choose Copy artifacts from other project, specify ansible as a source project and /home/ubuntu/ansible-config-artifact as a target directory. (pic)
+6. The main idea of save_artifacts project is to save artifacts into /home/ubuntu/ansible-config-artifact directory. To achieve this, create a Build step and choose Copy artifacts from other project, specify ansible as a source project and /home/ubuntu/ansible-config-artifact as a target directory.
 
-7. Test your set up by making some change in README.MD file inside your ansible-config-mgt repository (right inside master branch). (pic)
+![Screen Shot 2023-11-01 at 11 42 58 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/5674c733-2551-4c1e-888c-d78121324c4b)
+
+7. Test your set up by making some change in README.MD file inside your ansible-config-mgt repository (right inside master branch).
+
+<img width="907" alt="Screen Shot 2023-11-01 at 11 37 02 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e4ef566c-7880-4694-ad75-b8ee3124d5e0">
 
 If both Jenkins jobs have completed one after another – you shall see your files inside /home/ubuntu/ansible-config-artifact directory and it will be updated with every commit to your master branch.
+
+### Note:
+But if your build fails in the save_artifact, Then run this commands in the picture below  
+
+<img width="650" alt="Screen Shot 2023-11-01 at 11 36 02 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/267c8042-12c9-43a3-92a6-b63d59869c1d">
+
+Then test the set up again by making change to the master.
+
+<img width="1221" alt="Screen Shot 2023-11-01 at 11 51 03 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1093e74d-b049-4586-b843-d684ad128b38">
 
 Now your Jenkins pipeline is more neat and clean.
 
