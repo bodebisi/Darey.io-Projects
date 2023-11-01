@@ -47,7 +47,7 @@ You can configure number of builds to keep in order to save space on the server,
 If both Jenkins jobs have completed one after another – you shall see your files inside /home/ubuntu/ansible-config-artifact directory and it will be updated with every commit to your master branch.
 
 ### Note:
-But if your build fails in the save_artifact, Then run this commands in the picture below  
+If your build fails in the save_artifact, Then run this commands in the picture below  
 
 <img width="650" alt="Screen Shot 2023-11-01 at 11 36 02 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/267c8042-12c9-43a3-92a6-b63d59869c1d">
 
