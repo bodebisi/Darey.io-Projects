@@ -61,6 +61,8 @@ Now your Jenkins pipeline is more neat and clean.
 
 Before starting to refactor the codes, ensure that you have pulled down the latest code from master (main) branch, and created a new branch, name it refactor.
 
+<img width="445" alt="Screen Shot 2023-11-01 at 9 24 26 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/60dfcb39-4684-4ed0-802c-432821e1182e">
+
 DevOps philosophy implies constant iterative improvement for better efficiency – refactoring is one of the techniques that can be used, but you always have an answer to question "why?". Why do we need to change something if it works well?
 
 In Project 11 you wrote all tasks in a single playbook common.yml, now it is pretty simple set of instructions for only 2 types of OS, but imagine you have many more tasks and you need to apply this playbook to other servers with different requirements. In this case, you will have to read through the whole playbook to check if all tasks written there are applicable and is there anything that you need to add for certain server/OS families. Very fast it will become a tedious exercise and your playbook will become messy with many commented parts. Your DevOps colleagues will not appreciate such organization of your codes and it will be difficult for them to use your playbook.
@@ -134,7 +136,7 @@ The entire folder structure should look like below, but if you create it manuall
 
 After removing unnecessary directories and files, the roles structure should look like this
 
-<img width="729" alt="Screen Shot 2023-09-04 at 9 43 08 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b8c35b64-125a-4770-aa27-3103faddece2">
+<img width="208" alt="Screen Shot 2023-11-01 at 10 25 17 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3394f694-9bff-4b28-8388-7fbab07e5ea4">
 
 3. Update your inventory ansible-config-mgt/inventory/uat.yml file with IP addresses of your 2 UAT Web servers
 ### NOTE:
