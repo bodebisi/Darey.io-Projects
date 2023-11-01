@@ -83,6 +83,8 @@ The code above uses built in import_playbook Ansible module.(https://docs.ansibl
 Your folder structure should look like this;
 <img width="716" alt="Screen Shot 2023-09-04 at 9 30 26 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/43cb2f81-185b-4c4c-897e-e6f7e52dee6a">
 
+![Screen Shot 2023-11-01 at 12 21 51 PM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/2136c9a6-d0fc-4403-b7dd-9c76e901c11f)
+
 5. Run ansible-playbook command against the dev environment
 
 Since you need to apply some tasks to your dev servers and wireshark is already installed – you can go ahead and create another playbook under static-assignments and name it common-del.yml. In this playbook, configure deletion of wireshark utility.
@@ -91,12 +93,16 @@ Since you need to apply some tasks to your dev servers and wireshark is already 
  
 update site.yml with - import_playbook: ../static-assignments/common-del.yml instead of common.yml and run it against dev servers:
 
-#### cd /home/ubuntu/ansible-config-mgt/
+#### cd /home/ubuntu/ansible-config-artifact/
 
-#### ansible-playbook -i inventory/dev.yml playbooks/site.yaml
+#### ansible-playbook -i inventory/dev.yml playbooks/site.yml
+
+<img width="768" alt="Screen Shot 2023-11-01 at 9 00 01 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/6c82f35c-c68f-4f4d-85f2-ad6d687253f1">
 
 Make sure that wireshark is deleted on all the servers by running
 #### wireshark --version
+
+<img width="830" alt="Screen Shot 2023-11-01 at 8 58 05 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b57cf428-b147-445d-9fe7-44f59f5e506d">
 
 Now you have learned how to use import_playbooks module and you have a ready solution to install/delete packages on multiple servers with just one command.
 
