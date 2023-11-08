@@ -47,7 +47,6 @@ Confirm Jenkins status:
 #### sudo systemctl status jenkins 
 
 
-
 ##### Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository.
 ##### Configure Webhook in GitHub and set webhook to trigger ansible build.
 ##### Configure a Post-build job to save all (**) files, like you did it in Project 9.
@@ -193,6 +192,8 @@ directory on Jenkins-Ansible server.
 Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
 #### cd ansible-config-mgt
 #### ansible-playbook -i inventory/dev.yml playbooks/common.yml
+
+remember to first clone the repo to the bastion server.
 
 <img width="570" alt="Screen Shot 2023-10-05 at 5 39 14 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/783c3937-1d2b-477b-bb05-f875bb36b66d">
 
