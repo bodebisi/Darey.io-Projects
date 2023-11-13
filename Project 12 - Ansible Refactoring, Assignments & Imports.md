@@ -139,16 +139,19 @@ After removing unnecessary directories and files, the roles structure should loo
 <img width="208" alt="Screen Shot 2023-11-01 at 10 25 17 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/3394f694-9bff-4b28-8388-7fbab07e5ea4">
 
 3. Update your inventory ansible-config-mgt/inventory/uat.yml file with IP addresses of your 2 UAT Web servers
+
+<img width="685" alt="Screen Shot 2023-11-13 at 11 14 25 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/267730e5-355d-4207-b13b-a4bad29c7bea">
+
+
 ### NOTE:
 Ensure you are using ssh-agent to ssh into the Jenkins-Ansible instance just as you have done in project 11;
 
-To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible instance, please see this video:
+To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible instance, please see any of these video:
 
 For Windows users – ssh-agent on windows (https://youtu.be/OplGrY74qog)
 
 For Linux users – ssh-agent on linux (https://youtu.be/OplGrY74qog)
 
-(Pic)
 
 4. In /etc/ansible/ansible.cfg file uncomment roles_path string and provide a full path to your roles directory roles_path    = /home/ubuntu/ansible-config-mgt/roles, so Ansible could know where to find configured roles.
 
@@ -162,19 +165,31 @@ For Linux users – ssh-agent on linux (https://youtu.be/OplGrY74qog)
 
    Make sure httpd service is started
 
-Your main.yml may consist of following tasks: (pic)
+Your main.yml may consist of following tasks: 
+
+<img width="938" alt="Screen Shot 2023-11-13 at 11 16 24 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/d81bcdb3-d158-4eb4-aeaf-c5bdc52ea7f5">
 
 ### Step 4 – Reference ‘Webserver’ role
 
-Within the static-assignments folder, create a new assignment for uat-webservers uat-webservers.yml. This is where you will reference the role. (pic)
+Within the static-assignments folder, create a new assignment for uat-webservers uat-webservers.yml. This is where you will reference the role. 
+
+<img width="698" alt="Screen Shot 2023-11-13 at 11 26 23 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/19790bd1-2e1f-436a-a2ad-285ca0c0ba26">
 
 Remember that the entry point to our ansible configuration is the site.yml file. Therefore, you need to refer your uat-webservers.yml role inside site.yml.
 
-So, we should have this in site.yml (pic)
+So, we should have this in site.yml 
+
+<img width="973" alt="Screen Shot 2023-11-13 at 11 32 43 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/06d94856-88bf-4cc7-9b1e-1af825be3aa5">
 
 ### Step 5 – Commit & Test
 
-Commit your changes, create a Pull Request and merge them to master branch, make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to your Jenkins-Ansible server into /home/ubuntu/ansible-config-mgt/ directory.
+Commit your changes, create a Pull Request and merge them to master branch,
+
+<img width="730" alt="Screen Shot 2023-11-13 at 11 40 04 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/1bbf0d2d-5875-4e55-9429-d730f9b7fbdb">
+
+make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to your Jenkins-Ansible server into /home/ubuntu/ansible-config-mgt/ directory.
+
+<img width="901" alt="Screen Shot 2023-11-13 at 11 41 39 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8fb73a3a-89a9-41e7-a044-eb7ef11d6cf1">
 
 Now run the playbook against your uat inventory and see what happens:
 #### sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yaml
