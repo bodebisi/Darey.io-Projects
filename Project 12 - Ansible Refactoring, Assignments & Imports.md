@@ -192,11 +192,20 @@ make sure webhook triggered two consequent Jenkins jobs, they ran successfully a
 <img width="901" alt="Screen Shot 2023-11-13 at 11 41 39 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/8fb73a3a-89a9-41e7-a044-eb7ef11d6cf1">
 
 Now run the playbook against your uat inventory and see what happens:
-#### sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yaml
+#### ansible-playbook -i inventory/uat.yml playbooks/site.yml
+
+<img width="922" alt="Screen Shot 2023-11-15 at 10 20 39 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0291b077-d980-4b53-a2f8-064e7d8a8712">
+
+<img width="778" alt="Screen Shot 2023-11-15 at 10 21 03 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/0ff5957c-dca0-4882-ae33-f7c07603809e">
+
+![Screen Shot 2023-11-15 at 10 21 19 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/083124e2-b84e-48ac-92f1-43af71beea32)
+
 
 You should be able to see both of your UAT Web servers configured and you can try to reach them from your browser:
 
-http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php (Pic)
+http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php 
+
+![Screen Shot 2023-11-15 at 10 25 23 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/af5feb8f-6399-4d38-bca1-d118cface8a9)
 
 #Congratulations!
 You have learned how to deploy and configure UAT Web Servers using Ansible imports and roles!
