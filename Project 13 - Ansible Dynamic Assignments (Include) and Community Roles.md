@@ -78,9 +78,13 @@ git remote add origin https://github.com/<your-name>/ansible-config-mgt.git
 git branch roles-feature
 git switch roles-feature
 
+<img width="520" alt="Screen Shot 2023-11-18 at 8 49 36 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/66b4e573-22d8-4bb4-94d2-94082fc0166b">
+
 Inside roles directory create your new MySQL role with ansible-galaxy install geerlingguy.mysql and rename the folder to mysql
 
-mv geerlingguy.mysql/ mysql (Pic)
+<img width="561" alt="Screen Shot 2023-11-18 at 8 50 06 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/675a0b51-1a0f-41ea-89ed-5f9b1efee316">
+
+#### mv geerlingguy.mysql/ mysql 
 
 Read README.md file, and edit roles configuration to use correct credentials for MySQL required for the tooling website. (Pic)
 
