@@ -25,9 +25,11 @@ Since we will be using the same Ansible to configure multiple environments, and 
 For this reason, we will now create a folder to keep each environment's variables file. Therefore, create a new folder env-vars, then for each environment, create new YAML files which we will use to set variables.
 Your layout should now look like this.
 
-![Screen Shot 2023-11-15 at 10 55 48 AM](https://github.com/bodebisi/Darey.io-Projects/assets/132711315/c726d7bd-39bb-4ac5-9e51-faeedb4f2c8f)
+<img width="246" alt="Screen Shot 2023-11-18 at 8 30 43 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/e6a4d2cb-104e-40e5-b1d6-2d2044a0530c">
 
-Now paste the instruction below into the env-vars.yml file. (Pic)
+Now paste the instruction below into the env-vars.yml file. 
+
+<img width="686" alt="Screen Shot 2023-11-18 at 8 34 02 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9bd1c2e6-6be2-49c5-bcfd-e1dfba9bae8b">
 
 #### Notice 3 things here:
 1. We used include_vars syntax instead of include, this is because Ansible developers decided to separate different features of the module. From Ansible version 2.8, the include module is deprecated and variants of include_* must be used. These are:
@@ -54,8 +56,11 @@ https://docs.ansible.com/ansible/latest/collections/ansible/builtin/import_tasks
 
 Update site.yml file to make use of the dynamic assignment. (At this point, we cannot test it yet. We are just setting the stage for what is yet to come. So hang on to your hats)
 
-site.yml should now look like this (Pic)
+site.yml should now look like this 
 
+<img width="737" alt="Screen Shot 2023-11-18 at 8 35 40 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/22810591-6cb9-45ec-80d0-9f1bdaa9a24f">
+
+<img width="563" alt="Screen Shot 2023-11-18 at 8 36 59 PM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/b1de2804-c028-4ca4-aac2-cc9f411c46a3">
 
 ### Community Roles
 Now it is time to create a role for MySQL database - it should install the MySQL package, create a database and configure users. But why should we re-invent the wheel? There are tons of roles that have already been developed by other open source engineers out there. These roles are actually production ready, and dynamic to accomodate most of Linux flavours. With Ansible Galaxy again, we can simply download a ready to use ansible role, and keep going.
