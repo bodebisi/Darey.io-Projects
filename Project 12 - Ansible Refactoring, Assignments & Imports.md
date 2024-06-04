@@ -91,7 +91,7 @@ Your folder structure should look like this;
 
 Since you need to apply some tasks to your dev servers and wireshark is already installed – you can go ahead and create another playbook under static-assignments and name it common-del.yml. In this playbook, configure deletion of wireshark utility.
 
-(add pic of the code)
+<img width="622" alt="Screen Shot 2024-06-04 at 1 11 44 AM" src="https://github.com/bodebisi/Darey.io-Projects/assets/132711315/9f3930d0-42b0-4533-9c6d-1203b000326a">
  
 update site.yml with - import_playbook: ../static-assignments/common-del.yml instead of common.yml and run it against dev servers:
 
